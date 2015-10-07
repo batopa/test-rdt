@@ -6,7 +6,18 @@
 Welcome to Test RTD's documentation!
 ====================================
 
-Contents:
+This documentation was done to test Read the Docs.
+
+Features
+--------
+
+- None
+
+Contribute
+----------
+
+- Issue Tracker: https://github.com/batopa/test-rtd/issues
+
 
 .. toctree::
    :maxdepth: 2
@@ -19,4 +30,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
