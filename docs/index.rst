@@ -13,6 +13,11 @@ Features
 
 - None
 
+Changes
+-------
+
+- 1.0.1 introduce the Changes voice
+
 Contribute
 ----------
 
