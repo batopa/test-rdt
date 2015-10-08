@@ -6,30 +6,22 @@
 Welcome to Test RTD's documentation!
 ====================================
 
-This documentation was done to test Read the Docs.
-
-Features
---------
-
-- None
-
-Changes
--------
-
-- 1.0.1 introduce the Changes voice
-
-Contribute
-----------
-
-- Issue Tracker: https://github.com/batopa/test-rtd/issues
-
+BEdita frontend app can be easily enabled to serve REST API. Once
+enabled the API present a set of default endpoints that can be
+customized for frontend needs.
 
 .. toctree::
    :maxdepth: 2
    :caption: Main
 
-   example
-   start/index
+   setup
+   configuration
+   response_and_erroros
+   endpoints/index
+   authentication
+   pagination
+   customize_endpoints
+   formatting_bedita_objects
 
 
 Indices and tables
