@@ -26,7 +26,10 @@ Contribute
 
 .. toctree::
    :maxdepth: 2
+   :caption: Main
 
+   example
+   start/index
 
 
 Indices and tables
