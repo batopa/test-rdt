@@ -9,7 +9,6 @@ Obtain information about authenticated user
 
 **Request type: GET**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 
 Return information about current authenticated user

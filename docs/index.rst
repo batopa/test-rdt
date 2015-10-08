@@ -12,16 +12,16 @@ customized for frontend needs.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Main
+   :caption: REST API
 
    setup
    configuration
    response_and_erroros
-   endpoints/index
    authentication
    pagination
    customize_endpoints
    formatting_bedita_objects
+   endpoints/index
 
 
 Indices and tables

@@ -22,7 +22,7 @@ https://example.com/api/objects/1/relations/attach
 
 **Request type: GET**
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "objects",
@@ -122,18 +122,20 @@ If *:name* corresponds to a **section** or a **publication** then the
 response will have ``data.object.children`` with the total count of
 children, count of contents, count of sections and the related url.
 
-.. code:: json
+.. code-block:: json
 
-    "children": {
-        "count": 14,
-        "url": "https://example.com/api/objects/1/children",
-        "contents": {
-            "count": 12,
-            "url": "https://example.com/api/objects/1/contents"
-        },
-        "sections": {
-            "count": 2,
-            "url": "https://example.com/api/objects/1/sections"
+    {
+        "children": {
+            "count": 14,
+            "url": "https://example.com/api/objects/1/children",
+            "contents": {
+                "count": 12,
+                "url": "https://example.com/api/objects/1/contents"
+            },
+            "sections": {
+                "count": 2,
+                "url": "https://example.com/api/objects/1/sections"
+            }
         }
     }
 
@@ -159,7 +161,7 @@ The response will usually be an array of objects as:
 
 **Request type: GET**
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "objects",
@@ -190,6 +192,8 @@ The response will usually be an array of objects as:
         "url": "https://example.com/api/objects/1/children"
     }
 
+.. _get-a-list-of-children:
+
 Get a list of children /objects/:name/children
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -217,6 +221,8 @@ Get a list of siblings /objects/:name/siblings
 
 It returns the paginated siblings of object *:name*.
 
+.. _get-relations-count:
+
 Get relations count /objects/:name/relations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -224,7 +230,7 @@ It returns a summary of relations information about *:name* object. It
 show every relation with the count and the url to get the related
 objects detail.
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "objects",
@@ -249,6 +255,8 @@ Get the related objects detail /objects/:name/relations/:relation\_name
 It returns the paginated list of objects related by *:relation\_name* to
 *:name* object.
 
+.. _get-the-relation-detail:
+
 Get the relation detail /objects/:name/relations/:relation\_name/:related\_id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -257,7 +265,7 @@ Get the relation detail /objects/:name/relations/:relation\_name/:related\_id
 It returns the relation *:relation\_name* detail from main object
 *:name* and related object *related\_id*
 
-.. code:: json
+.. code-block:: json
 
     {
       "api": "objects",
@@ -280,7 +288,7 @@ Get the child position /objects/:name/children/:child\_id
 It returns the position (``priority`` key) of *:child\_id* relative to
 all children of parent object *:name*
 
-.. code:: json
+.. code-block:: json
 
     {
       "api": "objects",
@@ -297,14 +305,13 @@ Create/update an object
 
 **Request type: POST**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the object.
 
 Before save objects the frontend app that serve API has to be configured
 to know what objects can be written
 
-.. code:: php
+.. code-block:: php
 
     $config['api'] = array(
        ....
@@ -314,8 +321,7 @@ to know what objects can be written
         )
     );
 
-**Saving new objects** user has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Saving new objects** user has to be :doc:`authenticated </endpoints/auth>`
 and **data** from client must contain: \* ``object_type`` i.e. the
 object type you want to create \* at least a parent (``parents`` key)
 accessible (with right permission for user authorized) on publication
@@ -325,7 +331,7 @@ related to an accessible object on tree).
 
 Example of valid data from client:
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": {
@@ -348,7 +354,7 @@ Example of valid data from client:
                 "seealso": [
                     {
                         "related_id": 167
-                    }   
+                    }
                 ]
             },
             "categories": ["name-category-one", "name-category-two"],
@@ -388,8 +394,7 @@ Add/edit relations
 
 **Request type: POST**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the object.
 
 In order to add or edit relations you can use the endpoint ``/objects``
@@ -411,7 +416,7 @@ a request:
 
 valid data can be:
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": [
@@ -429,7 +434,7 @@ valid data can be:
 
 to create/update a bunch of relations, or
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": {
@@ -443,8 +448,7 @@ to create/update only one relation.
 If a "relation\_name" relation between main object and related object
 not exists then it is created else it is updated. If at least a relation
 is created a **201 Created** HTTP status code is sent and an HTTP header
-**Location** is set with url of `list of related
-objects <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#get-relations-count-objectsnamerelations>`__.
+**Location** is set with url of :ref:`list of related objects <get-relations-count>`.
 
 The response body will be an array of relation data just saved.
 
@@ -457,8 +461,7 @@ Edit (replace) relation data between objects
 
 **Request type: PUT**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the objects.
 
 In order to edit the relation data between two objects you can use the
@@ -469,7 +472,7 @@ and *:related\_id* the related object id. Relations data must be an
 object with data
 
 -  ``params`` fields depend from relation type
--  ``priority``\ is the position of the relation. Relation with lower
+-  ``priority`` is the position of the relation. Relation with lower
    priority are shown before
 
 At least ``params`` or ``priority`` must be defined. If one of these is
@@ -479,7 +482,7 @@ So to edit attach relation between object 1 and 2 the request will be
 
 ``PUT /objects/1/relations/attach/2``
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": {
@@ -491,16 +494,14 @@ So to edit attach relation between object 1 and 2 the request will be
     }
 
 In case of success the server will respond with a **200 HTTP status
-code** and the response body will be the same of `Get the relation
-detail <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#get-the-relation-detail-objectsnamerelationsrelation_namerelated_id>`__
+code** and the response body will be the same of :ref:`Get the relation detail <get-the-relation-detail>`
 
 Add/edit children
 -----------------
 
 **Request type: POST**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the object.
 
 In order to add or edit children to a area/section object type you can
@@ -510,7 +511,7 @@ of child data or an object with child data if you need to save only one
 child (note that it is the same that send an array with only one child).
 
 -  ``child_id`` is the child object id and is mandatory
--  ``priority``\ is the position of the child on the tree
+-  ``priority`` is the position of the child on the tree
 
 For example to add/edit children to object with id 3 you can do a
 request:
@@ -519,7 +520,7 @@ request:
 
 valid data can be:
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": [
@@ -535,7 +536,7 @@ valid data can be:
 
 to create/update a bunch of children, or
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": {
@@ -549,8 +550,7 @@ to create/update only one child.
 If a "child\_id" is a new children for parent object then it is created
 on tree else it is updated. If at least a new child is created a **201
 Created** HTTP status code is sent and an HTTP header **Location** is
-set with url of `list of children
-objects <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#get-a-list-of-children-objectsnamechildren>`__.
+set with url of :ref:`list of children objects <get-a-list-of-children>`.
 
 The response body will be an array of children data just saved.
 
@@ -563,8 +563,7 @@ Edit children position
 
 **Request type: PUT**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the objects.
 
 In order to edit children position you can use the endpoint ``/objects``
@@ -577,7 +576,7 @@ For example to edit the position of child with id 2 of parent with id 1:
 
 ``PUT /objects/1/children/2``
 
-.. code:: json
+.. code-block:: json
 
     {
         "data": {
@@ -590,24 +589,22 @@ Delete an object
 
 **Request type: DELETE**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the object.
 
 To delete an object has to be used the endpoint ``/objects/:name`` where
 *:name* can be the object id or nickname.
 
-If the object is deleted successfully a *204 No Content* HTTP status
+If the object is deleted successfully a **204 No Content** HTTP status
 code is sent. Further requests to delete the same object will return a
-*404 Not Found* HTTP status code.
+**404 Not Found** HTTP status code.
 
 Delete a relation between objects
 ---------------------------------
 
 **Request type: DELETE**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the object.
 
 In order to delete an existent relation between two objects you can use
@@ -617,16 +614,15 @@ between objects and *:related\_id* is the object id related to object
 *:name*.
 
 If the relation is succesfully deleted *204 No Content* HTTP status code
-is sent. Further requests to delete the same relation will return a *404
-Not Found* HTTP status code.
+is sent. Further requests to delete the same relation will return a **404
+Not Found** HTTP status code.
 
 Remove child from a parent
 --------------------------
 
 **Request type: DELETE**
 
-**Conditions:** User has to be
-`authenticated <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
+**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
 and has to have the permission to access to the object.
 
 To remove an existent child of an object the endpoint

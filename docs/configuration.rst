@@ -1,10 +1,10 @@
-configuration
+Configuration
 =============
 
 To configure REST API you need to edit the frontend configuration file
 ``app/config/frontend.ini.php``, for example
 
-.. code:: php
+.. code-block:: php
 
     $config['api'] = array(
         'baseUrl' => '/api/v1',
@@ -44,16 +44,10 @@ Possible configuration params are:
 -  ``auth`` contains authentication configurations:
 -  ``component`` define the name of auth component to use. By default
    ``ApiAuth`` Component is used
--  ``JWT`` define some options used in `Json Web
-   Token <http://jwt.io>`__
-   `authentication <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#authentication>`__
-   as the 'expires in' time (in seconds) and the hashing algorithm to
-   use
--  ``formatting`` permits to setup some fomatting rules as object fields
-   to
-   `remove <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#remove-unwanted-fields>`__
-   or to
-   `keep <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#keep-fields-that-are-removed-by-default>`__
+-  ``JWT`` define some options used in `Json Web Token <http://jwt.io>`_ :doc:`authentication </endpoints/auth>`
+   as the *"expires in"* time (in seconds) and the hashing algorithm to use
+-  ``formatting`` permits to setup some fomatting rules as object fields to
+   :ref:`remove <formatting-remove-fields>` or to :ref:`keep <formatting-keep-fields>`
 -  ``validation`` setup some validation rules used generally in write
    operations. For example ``writableObjects`` define what object types
    are writable.

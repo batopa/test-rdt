@@ -1,19 +1,5 @@
--  `Introducing the ``ApiFormatter``
-   Component <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#introducing-the-apiformatter-component>`__
--  `Help ApiFormatter to cast object fields in the right
-   way <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#help-apiformatter-to-cast-object-fields-in-the-right-way>`__
--  `Remove unwanted
-   fields <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#remove-unwanted-fields>`__
--  `Add fields to remove from
-   configuration <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#add-fields-to-remove-from-configuration>`__
--  `Add fields to remove on the
-   fly <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#add-fields-to-remove-on-the-fly>`__
--  `Keep fields that are removed by
-   default <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#keep-fields-that-are-removed-by-default>`__
--  `Add fields to keep from
-   configuration <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#add-fields-to-keep-from-configuration>`__
--  `Add fields to keep on the
-   fly <https://github.com/bedita/bedita/wiki/REST-API:-formatting-BEdita-objects#add-fields-to-keep-on-the-fly>`__
+Formatting BEdita objects
+=========================
 
 Introducing the ``ApiFormatter`` Component
 ------------------------------------------
@@ -32,7 +18,7 @@ When you load an object or list of objects you should always use the
 ``ApiFromatter`` Component to have data always formatted in the same
 way.
 
-.. code:: php
+.. code-block:: php
 
     // load an object
     $object = $this->loadObj($id);
@@ -48,7 +34,7 @@ way.
 accept as second argument an array of options with which it is possible
 add to the formatted object the count of relations and children.
 
-.. code:: php
+.. code-block:: php
 
     $result = $this->ApiFormatter->formatObject($object, array(
         'countRelations' => true,
@@ -56,6 +42,7 @@ add to the formatted object the count of relations and children.
     ));
 
 By default no count is done.
+
 
 Help ApiFormatter to cast object fields in the right way
 --------------------------------------------------------
@@ -68,7 +55,7 @@ defined in database as 'integer', 'float', 'date', 'datetime',
 ``BEAppObjectModel::apiTransformer()`` method and it is something
 similar to
 
-.. code:: php
+.. code-block:: php
 
     array(
         'id' => 'integer',
@@ -115,7 +102,7 @@ By default only tables that form the object chain plus 'categories',
 be overridden to customize the result. For example the ``Event`` model
 add to basic transformer the ``DateItem`` transformer:
 
-.. code:: php
+.. code-block:: php
 
     public function apiTransformer(array $options = array()) {
         $transformer = parent::apiTransformer($options);
@@ -124,7 +111,7 @@ add to basic transformer the ``DateItem`` transformer:
     }
 
 The ``ApiFormatter`` uses these transformers merged to common object
-transformer ``ApiFormatterComponent::transformers['object']`` to present
+transformer ``ApiFormatterComponent::$transformers['object']`` to present
 consistent data to client. It is possible to use some special
 transformer types that are:
 
@@ -132,12 +119,15 @@ transformer types that are:
    value unchanged
 -  ``integerArray`` that cast to integer all array values
 
+
+.. _formatting-remove-fields:
+
 Remove unwanted fields
 ----------------------
 
 Another useful task of ``ApiFormatter`` is to clean unwanted fields from
 data exposed to client. To do that it uses
-``ApiFormatter::objectFieldsToRemove`` array that can be customized
+``ApiFormatter::$objectFieldsToRemove`` array that can be customized
 through configuration or on the fly in controller.
 
 Add fields to remove from configuration
@@ -147,7 +137,7 @@ In ``config/frontend.ini.php`` or ``config/frontend.cfg.php`` is
 possible to customize which fields exposed by default you want to remove
 from results.
 
-.. code:: php
+.. code-block:: php
 
     $config['api'] = array(
         'baseUrl' => '/api/v1',
@@ -181,7 +171,7 @@ In your ``ApiController`` you can decide in every moment to change which
 fields remove from results using
 ``ApiFormatter::objectFieldsToRemove()`` method.
 
-.. code:: php
+.. code-block:: php
 
     // get the current value
     $currentFieldsToRemove = $this->ApiFormatter->objectFieldsToRemove();
@@ -200,6 +190,9 @@ fields remove from results using
         'remove' => array('title', 'description')
     ));
 
+
+.. _formatting-keep-fields:
+
 Keep fields that are removed by default
 ---------------------------------------
 
@@ -212,7 +205,7 @@ Add fields to keep from configuration
 
 In ``config/frontend.cfg.php``
 
-.. code:: php
+.. code-block:: php
 
     $config['api'] = array(
         'baseUrl' => '/api/v1',
@@ -240,7 +233,7 @@ Add fields to keep on the fly
 
 In your ``ApiController``
 
-.. code:: php
+.. code-block:: php
 
     // to keep fields
     $this->ApiFormatter->objectFieldsToRemove(array(

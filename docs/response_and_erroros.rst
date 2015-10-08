@@ -2,18 +2,18 @@ Response and Errors
 ===================
 
 Response
-~~~~~~~~
+--------
 
 Usually the response of API query has the structure
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "objects",
         "data": {},
         "method": "get",
         "params": [],
-        "url": "http://example.com/api/v1/objects/1"
+        "url": "https://example.com/api/v1/objects/1"
     }
 
 where:
@@ -33,11 +33,11 @@ present data with that passed.
 Other meta data can be placed inside response object, for example
 ``paging`` useful to paginate results:
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "objects",
-        "data": {...},
+        "data": {},
         "method": "get",
         "paging": {
             "page": 1,
@@ -47,7 +47,7 @@ Other meta data can be placed inside response object, for example
             "total_pages": 100
         },
         "params": [],
-        "url": "http://example.com/api/v1/objects/1/children"
+        "url": "https://example.com/api/v1/objects/1/children"
     }
 
 where:
@@ -61,16 +61,16 @@ where:
 .. note::
 
    If you need **to serve empty response body** to client you can use
-   ``ApiBaseController::emptyResponse()`` that by default send a *204 No
-   Content* status code. Pass another status code as first argument to send
+   ``ApiBaseController::emptyResponse()`` that by default send a **204 No
+   Content** HTTP status code. Pass another status code as first argument to send
    different status code.
 
 Errors
-~~~~~~
+------
 
 Every time the API thrown an error the response will be similar to
 
-.. code:: json
+.. code-block:: json
 
     {
         "error": {
@@ -79,7 +79,7 @@ Every time the API thrown an error the response will be similar to
             "message": "Method Not Allowed",
             "details": "Method Not Allowed",
             "more_info": null,
-            "url": "http://example.com/api/v1/foobar"
+            "url": "https://example.com/api/v1/foobar"
         }
     }
 

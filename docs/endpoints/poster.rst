@@ -21,7 +21,7 @@ its relations, in particular:
 
 The response will be
 
-.. code:: json
+.. code-block:: json
 
     {
       "api": "poster",

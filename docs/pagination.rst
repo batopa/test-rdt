@@ -1,15 +1,16 @@
+Pagination
+==========
+
 Requesting a list of objects by ``/objects`` endpoint the result will be
-paginated using default values that you can
-`customize <https://github.com/bedita/bedita/wiki/REST-API:-pagination#define-your-api-pagination-default-options>`__
-in ``ApiController``.
+paginated using default values that you can :ref:`customize <pagination-customize>` in ``ApiController``.
 
 In the response you'll see tha pagination data in ``paging`` key
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "objects",
-        "data": {...},
+        "data": {},
         "method": "get",
         "paging": {
             "page": 1,
@@ -19,7 +20,7 @@ In the response you'll see tha pagination data in ``paging`` key
             "total_pages": 100
         },
         "params": [],
-        "url": "api/v1/objects/1/children"
+        "url": "https://example.com/api/v1/objects/1/children"
     }
 
 where
@@ -36,10 +37,11 @@ the page 5.
 
 You can also change the page size always through GET parameter, for
 example ``/api/objects/1/children?page_size=50`` to request 50 objects
-per page. ``page_size`` can't be greater of
-``$paginationOptions['maxPageSize']`` defined in controller.
+per page. ``page_size`` can't be greater of ``$paginationOptions['maxPageSize']`` defined in controller.
 
 See below to know how to change the default values.
+
+.. _pagination-customize:
 
 Define your API pagination default options
 ------------------------------------------
@@ -47,7 +49,7 @@ Define your API pagination default options
 The default values used paginating items are defined in
 ``ApiBaseController::paginationOptions`` property.
 
-.. code:: php
+.. code-block:: php
 
     protected $paginationOptions = array(
         'page' => 1,
@@ -72,13 +74,14 @@ to use in some methods as ``FrontendController::loadSectionObjects()``.
 
 In this way in a 'custom' API endpoint you can simply do
 
-.. code:: php
+.. code-block:: php
 
     protected function custom($id) {
         $result = $this->loadSectionObjects($id, $this->paginationOptions);
-        ...    
         // format and set pagination
         $this->setPaging($this->ApiFormatter->formatPaging($result['toolbar']));
+
+        // do other stuff
     }
 
 and you are sure that pagination will work properly without doing

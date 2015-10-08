@@ -1,19 +1,13 @@
--  `Custom
-   endpoints <https://github.com/bedita/bedita/wiki/REST-API:-customize-endpoints#custom-endpoints>`__
--  `Blacklist
-   endpoints <https://github.com/bedita/bedita/wiki/REST-API:-customize-endpoints#blacklist-endpoints>`__
--  `Enable special object types
-   endpoints <https://github.com/bedita/bedita/wiki/REST-API:-customize-endpoints#enable-special-object-types-endpoints>`__
--  `Customize /objects endpoint with your own url path filter
-   types <https://github.com/bedita/bedita/wiki/REST-API:-customize-endpoints#customize-objects-endpoint-with-your-own-url-path-filter-types>`__
+Customize endpoints
+===================
+
+.. _custom-endpoints:
 
 Custom endpoints
 ----------------
 
-Once you have `enabled a frontend to consume
-API <https://github.com/bedita/bedita/wiki/REST-API:-Setup-a-frontend-to-consume-API>`__
-you have a set of `default available
-endpoints <https://github.com/bedita/bedita/wiki/REST-API:-endpoints>`__
+Once you have :doc:`enabled a frontend to consume API </setup>`
+you have a set of :doc:`default available endpoints </endpoints/index>`
 visible pointing the browser to your API base url.
 
 Sometimes you would want to define other endpoints to serve your custom
@@ -22,13 +16,13 @@ attribute of ``ApiBaseController``.
 
 Write in your ``ApiController``
 
-.. code:: php
+.. code-block:: php
 
     protected $endPoints = array('friends');
 
 and define the related custom method that will handle the data to show
 
-.. code:: php
+.. code-block:: php
 
     protected function friends() {
         $friendsList = array('Tom', 'Jerry');
@@ -40,7 +34,7 @@ response ``data`` key. Point the browser to your API base url you should
 see 'friends' in the endpoints list and if you request
 ``GET /api/base/url/friends`` you should see
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "friends",
@@ -50,7 +44,7 @@ see 'friends' in the endpoints list and if you request
         ],
         "method": "get",
         "params": [],
-        "url": "http://example.com/api/v1/friends"
+        "url": "https://example.com/api/v1/friends"
     }
 
 In this way all request types (GET, POST, PUT, DELETE) have to be
@@ -58,7 +52,7 @@ handled by ``friends()`` method. Another possibility is to create one
 method for every request type allowed from the endpoint. It can be done
 creating methods named *"request type + endpoint camelized"*.
 
-.. code:: php
+.. code-block:: php
 
     protected function getFriends() {
     }
@@ -72,25 +66,26 @@ creating methods named *"request type + endpoint camelized"*.
     protected function deleteFriends() {
     }
 
+
 Blacklist endpoints
 -------------------
 
 In some situations you will not want to expose some or all default
 endpoints, so in order to disable them it is possible to define a
 blacklist. After that calling those endpoints the response will be a
-**405** HTTP error status code (Method Not Allowed).
+**405 Method Not Allowed** HTTP error status code.
 
-For example to blacklist 'auth' and 'objects' endpoints, in your
+For example to blacklist "auth" and "objects" endpoints, in your
 ``ApiController`` override ``$blacklistEndPoints`` writing
 
-.. code:: php
+.. code-block:: php
 
     protected $blacklistEndPoints = array('auth', 'objects');
 
-Now, pointing to API base url you shouldn't see 'auth' and 'objects'
-endpoints anymore.
+Now, pointing to API base url you shouldn't see "auth" and "objects" endpoints anymore.
 
-Pointing to them directly and you will receive a 405 HTTP error.
+Pointing to them directly and you will receive a **405 HTTP error**.
+
 
 Enable special object types endpoints
 -------------------------------------
@@ -100,7 +95,7 @@ default. Those endpoints refer to BEdita object types mapping them to
 their pluralize form. So if you want to enable ``/documents`` end
 ``/galleries`` endpoints you have to edit ``ApiController``
 
-.. code:: php
+.. code-block:: php
 
     protected $whitelistObjectTypes = array('document', 'gallery');
 
@@ -110,17 +105,19 @@ the object type related.
 Again go to API base url to see 'documents' and 'galleries' added to
 endpoints list.
 
-**Note that those special endpoints work only for GET requests.**
+   .. note::
+
+      Note that those special endpoints work only for GET requests.
+
 
 Customize ``/objects`` endpoint with your own URL path filter types
 -------------------------------------------------------------------
 
 ``objects`` endpoint can be customized with URL path filters building
 endpoint structured as ``/objects/:id/url_path_filter``. URL path
-filters on by default are visible in
-``ApiBaseController::allowedObjectsUrlPath`` property
+filters on by default are visible in ``ApiBaseController::$allowedObjectsUrlPath`` property
 
-.. code:: php
+.. code-block:: php
 
     protected $allowedObjectsUrlPath = array(
             'get' => array(
@@ -164,7 +161,7 @@ For example, supposing to want to remove all 'delete' and 'post' URL
 path filters and add a new 'foo\_bar' filter for GET request, in
 ``ApiController`` we can override
 
-.. code:: php
+.. code-block:: php
 
     protected $allowedObjectsUrlPath = array(
             'get' => array(
@@ -180,7 +177,7 @@ path filters and add a new 'foo\_bar' filter for GET request, in
 
 and add the method
 
-.. code:: php
+.. code-block:: php
 
     protected function getObjectsFooBar($objectId) {
         // handle request here
@@ -188,7 +185,7 @@ and add the method
 
 In this way the new URL path filter is active and reachable from
 ``GET /objects/:id/foo_bar``. Every other request type (POST, PUT,
-DELETE) to that will receive *405 Method Not Allowed*.
+DELETE) to that will receive **405 Method Not Allowed**.
 
 If our 'foo\_bar' URL path filter have to support
 ``GET /objects/:id/foo_bar/:foo_val`` requests then
@@ -197,7 +194,7 @@ second argument. A best practice should be to add to method a validation
 on the number of arguments supported to avoid to respond to request as
 ``GET /objects/:id/foo_bar/:foo_val/bla/bla/bla``.
 
-.. code:: php
+.. code-block:: php
 
     protected function getObjectsFooBar($objectId, $fooVal = null) {
         if (func_num_args() > 2) {
@@ -205,4 +202,3 @@ on the number of arguments supported to avoid to respond to request as
         }
         // handle request here
     }
-

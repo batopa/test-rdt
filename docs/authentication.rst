@@ -1,3 +1,6 @@
+Auhtentication
+==============
+
 By default all GET requests don't require client and user
 authenticatication unless the object requested has permission on it. In
 that case the user has to be authenticated before require the resource.
@@ -6,11 +9,10 @@ Other operations as writing/deleting objects (POST, PUT, DELETE on
 require authentication.
 
 The API follow a **token based authentication flow** using a `Json Web
-Token <http://jwt.io>`__ as ``access_token`` and an opaque token as
+Token <http://jwt.io>`_ as ``access_token`` and an opaque token as
 ``refresh_token`` useful to renew the ``access_token`` without ask again
-the user credentials. See
-`here <https://github.com/bedita/bedita/wiki/REST-API:-endpoints#endpoint-auth>`__
-to more details on how to obtain ``access_token`` and ``refresh_token``.
+the user credentials. See :doc:`here </endpoints/auth>` to more details on
+how to obtain ``access_token`` and ``refresh_token``.
 
 ::
 
@@ -38,33 +40,33 @@ The ``access_token`` must be used in every request that require
 permission. To use the ``access_token`` it has to be sent in HTTP
 headers as **bearer token** ``Authorization: Bearer eyJ0eXAi.....``.
 
---------------
+.. note::
 
-Because of JWT is digital signed using ``'Security.salt'`` you should
-always remember to change it in ``app/config/core.php`` file:
+    Because of JWT is digital signed using ``'Security.salt'`` you should
+    always remember to change it in ``app/config/core.php`` file:
 
-.. code:: php
+    .. code-block:: php
 
-    Configure::write('Security.salt', 'my-security-random-string');
+        Configure::write('Security.salt', 'my-security-random-string');
 
-It is possible to invalidate all ``access_token`` released simply
-changing that value.
+    It is possible to invalidate all ``access_token`` released simply
+    changing that value.
 
---------------
 
 All the logic to handle authentication is in ``ApiAuth`` component and
 ``ApiBaseController`` use it for you so authentication works out of the
-box. If you need to protect `custom
-endpoints <https://github.com/bedita/bedita/wiki/REST-API:-customize-endpoints>`__
+box. If you need to protect :ref:`custom endpoints <custom-endpoints>`
 you have to add to custom method
 
-.. code:: php
+.. code-block:: php
 
     protected function customEndPoint() {
         if (!$this->ApiAuth->identify()) {
             throw new BeditaUnauthorizedException();
-        }    
+        }
     }
+
+
 
 Customize authentication
 ------------------------
@@ -88,7 +90,7 @@ For example supposing you want to add additional check to user
 credentials, you can simply override ``ApiAuth::authenticate()`` method
 which deals with it:
 
-.. code:: php
+.. code-block:: php
 
     App::import('Component', 'ApiAuth');
 
@@ -104,7 +106,7 @@ and finally to activate the component all you have to do is define in
 configuration file ``config/frontend.ini.php`` the auth component you
 want to use.
 
-.. code:: php
+.. code-block:: php
 
     $config['api'] = array(
         'baseUrl' => '/api',

@@ -5,18 +5,15 @@ endpoint: /auth
 ---------------
 
 It used to retrieve an ``access_token`` to access protected items, renew
-``access_token`` and remove permissions. The ``access_token`` is a `Json
-Web Token <http://jwt.io>`__
-(`IETF <https://tools.ietf.org/html/rfc7519>`__). More info on
-authentication
-`here <https://github.com/bedita/bedita/wiki/REST-API:-Authentication>`__
+``access_token`` and remove permissions. The ``access_token`` is a `Json Web Token <http://jwt.io>`_
+(`IETF <https://tools.ietf.org/html/rfc7519>`_). More info on :doc:`authentication </authentication>`
 
 .. note::
 
     Because of JWT is digital signed using ``'Security.salt'`` you should
     always remember to change it in ``app/config/core.php`` file:
 
-    .. code:: php
+    .. code-block:: php
 
         Configure::write('Security.salt', 'my-security-random-string');
 
@@ -71,7 +68,7 @@ Renew the access token
 ~~~~~~~~~~~~~~~~~~~~~~
 
 If the access token was expired you need to generate a new one started
-by refresh token. *In this case do not pass the expired access token*
+by refresh token. **In this case do not pass the expired access token**
 
 **Request type: POST**
 
@@ -110,7 +107,18 @@ Calling /auth in GET using the access\_token return the updated
 
 It returns
 
-``json  {     "api": "auth",     "data": {         "access_token": "rftJasd3.....",         "expires_in": 48     },     "method": "get",     "params": [ ],     "url": "https://example.com/api/auth"  }``
+.. code-block:: json
+
+    {
+        "api": "auth",
+        "data": {
+            "access_token": "rftJasd3.....",
+            "expires_in": 48
+        },
+        "method": "get",
+        "params": [ ],
+        "url": "https://example.com/api/auth"
+    }
 
 Revoking a refresh token /auth/:refresh\_token
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
