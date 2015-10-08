@@ -16,9 +16,9 @@ authentication
     Because of JWT is digital signed using ``'Security.salt'`` you should
     always remember to change it in ``app/config/core.php`` file:
 
-.. code:: php
+    .. code:: php
 
-    Configure::write('Security.salt', 'my-security-random-string');
+        Configure::write('Security.salt', 'my-security-random-string');
 
 It is possible to invalidate all ``access_token`` released simply
 changing that value.
