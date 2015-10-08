@@ -1,3 +1,6 @@
+configuration
+=============
+
 To configure REST API you need to edit the frontend configuration file
 ``app/config/frontend.ini.php``, for example
 
@@ -54,4 +57,3 @@ Possible configuration params are:
 -  ``validation`` setup some validation rules used generally in write
    operations. For example ``writableObjects`` define what object types
    are writable.
-

@@ -11,10 +11,10 @@ Web Token <http://jwt.io>`__
 authentication
 `here <https://github.com/bedita/bedita/wiki/REST-API:-Authentication>`__
 
-**Important**
+.. note::
 
-Because of JWT is digital signed using ``'Security.salt'`` you should
-always remember to change it in ``app/config/core.php`` file:
+    Because of JWT is digital signed using ``'Security.salt'`` you should
+    always remember to change it in ``app/config/core.php`` file:
 
 .. code:: php
 
@@ -30,7 +30,7 @@ Obtain an access token
 
 Parameters
 
-.. code:: json
+.. code-block:: json
 
     {
         "username": "test",
@@ -44,7 +44,7 @@ passed.
 If user is validated the response will contain the JWT, the time to
 expire (in seconds) and the refresh\_token useful to renew the JWT
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "auth",
@@ -77,7 +77,7 @@ by refresh token. *In this case do not pass the expired access token*
 
 Parameters
 
-.. code:: json
+.. code-block:: json
 
     {
         "grant_type": "refresh_token",
@@ -86,7 +86,7 @@ Parameters
 
 If refresh token is valid it returns the new access token
 
-.. code:: json
+.. code-block:: json
 
     {
         "api": "auth",
