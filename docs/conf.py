@@ -17,6 +17,9 @@ import os
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
+def setup(app):
+    app.add_stylesheet('api_methods.css')
+
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if not on_rtd:  # only import and set the theme if we're building docs locally
     import sphinx_rtd_theme
@@ -28,12 +31,6 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 lexers["php"] = PhpLexer(startinline=True, linenos=1)
 lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
 primary_domain = "php"
-
-#html_context = {
-#  'css_files': [
-#    '_static/api_methods.css',  # overrides api methods colors
-#  ],
-#}
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
