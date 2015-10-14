@@ -1,0 +1,16 @@
+/* overrdie API methods color */
+
+dl.post dt {
+    background: #E7F6EC !important;
+    border-top-color: #10A54A !important;
+}
+
+dl.put dt {
+    background: #FBE1B8 !important;
+    border-top-color: #F39C12 !important;
+}
+
+dl.delete dt {
+    background: #F8CAC5 !important;
+    border-top-color: #E74C3C !important;
+}

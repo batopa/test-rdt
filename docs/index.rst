@@ -22,11 +22,3 @@ customized for frontend needs.
    customize_endpoints
    formatting_bedita_objects
    endpoints/index
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

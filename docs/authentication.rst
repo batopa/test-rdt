@@ -40,7 +40,7 @@ The ``access_token`` must be used in every request that require
 permission. To use the ``access_token`` it has to be sent in HTTP
 headers as **bearer token** ``Authorization: Bearer eyJ0eXAi.....``.
 
-.. note::
+.. warning::
 
     Because of JWT is digital signed using ``'Security.salt'`` you should
     always remember to change it in ``app/config/core.php`` file:

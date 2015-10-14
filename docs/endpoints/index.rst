@@ -1,10 +1,7 @@
 API reference
 =============
 
-**WARNING: This is a draft document, endpoints and data structure could
-likely change. We are still designing some parts of the response.**
-
-A frontend app enabled to consume REST API exposes a set of default
+A :doc:`frontend app enabled to consume REST API </setup>` exposes a set of default
 endpoints:
 
 .. toctree::
@@ -14,3 +11,8 @@ endpoints:
     objects
     poster
     me
+
+.. note::
+
+    Every :http:method:`post` request can send the payload as ``x-www-form-urlencoded`` or ``application/json``.
+    For readability all examples will use ``Content-type: application/json``.
