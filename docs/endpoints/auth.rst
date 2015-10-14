@@ -5,7 +5,7 @@ It used to retrieve an ``access_token`` to access protected items, renew
 ``access_token`` and remove permissions. The ``access_token`` is a `Json Web Token <http://jwt.io>`_
 (`IETF <https://tools.ietf.org/html/rfc7519>`_). More info on :doc:`authentication </authentication>`
 
-.. note::
+.. important::
 
     Because of JWT is digital signed using ``'Security.salt'`` you should
     always remember to change it in ``app/config/core.php`` file:
