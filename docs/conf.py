@@ -29,11 +29,11 @@ lexers["php"] = PhpLexer(startinline=True, linenos=1)
 lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
 primary_domain = "php"
 
-html_context = {
-  'css_files': [
-    '_static/api_methods.css',  # overrides api methods colors
-  ],
-}
+#html_context = {
+#  'css_files': [
+#    '_static/api_methods.css',  # overrides api methods colors
+#  ],
+#}
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
