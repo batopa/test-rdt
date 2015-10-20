@@ -5,17 +5,7 @@ It used to retrieve an ``access_token`` to access protected items, renew
 ``access_token`` and remove permissions. The ``access_token`` is a `Json Web Token <http://jwt.io>`_
 (`IETF <https://tools.ietf.org/html/rfc7519>`_). More info on :doc:`authentication </authentication>`
 
-.. important::
-
-    Because of JWT is digital signed using ``'Security.salt'`` you should
-    always remember to change it in ``app/config/core.php`` file:
-
-    .. code-block:: php
-
-        Configure::write('Security.salt', 'my-security-random-string');
-
-    It is possible to invalidate all ``access_token`` released simply
-    changing that value.
+.. include:: /fragments/jwt_important.rst
 
 Obtain an access token
 ----------------------

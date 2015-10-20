@@ -1,154 +1,241 @@
-Objects
-=======
+Objects ``/objects``
+====================
 
-endpoint: /objects
-------------------
+Get an object
+-------------
 
-It used to get a BEdita object or a set of objects.
+.. http:get:: /objects/(name)
 
-Get an object /objects/:name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Get an object detail.
 
-where *:name* **can be the object id or the object unique name
-(nickname)**. Note that the response data fields can change depending of
-BEdita object type exposed so you could see more or less fields respect
-to example below.
+    .. include:: /fragments/objects_related_endpoint_desc.rst
 
-Every object can have relations with other objects. The count of objects
-related is in ``data.object.relations.<relation_name>`` where there are
-``count`` (the number of related object) and ``url`` fields. The ``url``
-is the complete API request url to get the object related, for example
-https://example.com/api/objects/1/relations/attach
+    .. note::
 
-**Request type: GET**
+        Note that the response data fields can change depending of
+        BEdita object type exposed and configuration.
 
-.. code-block:: json
+    **Example request**:
 
-    {
-        "api": "objects",
-        "data": {
-            "object": {
-                "id": 218932,
-                "start_date": "2015-01-08T00:00:00+0100",
-                "end_date": null,
-                "subject": null,
-                "abstract": null,
-                "body": "This is the body text",
-                "object_type_id": 22,
-                "created": "2015-01-30T10:04:49+0100",
-                "modified": "2015-05-08T12:59:49+0200",
-                "title": "hello world",
-                "nickname": "hello-world",
-                "description": "the description",
-                "valid": true,
-                "lang": "eng",
-                "rights": "",
-                "license": "",
-                "creator": "",
-                "publisher": "",
-                "note": null,
-                "comments": "off",
-                "publication_date": "2015-01-08T00:00:00+0100",
-                "languages": {
-                    "ita": {
-                        "title": "ciao mondo"
-                    }
-                },
-                "relations": {
-                    "attach": {
-                        "count": 8,
-                        "url": "https://example.com/api/objects/1/relation/attach"
+    .. sourcecode:: http
+
+        GET /objects/15 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "api": "objects",
+            "data": {
+                "object": {
+                    "id": 15,
+                    "start_date": "2015-01-08T00:00:00+0100",
+                    "end_date": null,
+                    "subject": null,
+                    "abstract": null,
+                    "body": "This is the body text",
+                    "object_type_id": 22,
+                    "created": "2015-01-30T10:04:49+0100",
+                    "modified": "2015-05-08T12:59:49+0200",
+                    "title": "hello world",
+                    "nickname": "hello-world",
+                    "description": "the description",
+                    "valid": true,
+                    "lang": "eng",
+                    "rights": "",
+                    "license": "",
+                    "creator": "",
+                    "publisher": "",
+                    "note": null,
+                    "comments": "off",
+                    "publication_date": "2015-01-08T00:00:00+0100",
+                    "languages": {
+                        "ita": {
+                            "title": "ciao mondo"
+                        }
                     },
-                    "seealso": {
-                        "count": 2,
-                        "url": "https://example.com/api/objects/1/relation/seealso"
-                    }
-                },
-                "object_type": "Document",
-                "authorized": true,
-                "free_access": true,
-                "custom_properties": {
-                    "bookpagenumber": "12",
-                    "number": "8"
-                },
-                "geo_tags": [
-                    {
-                        "id": 68799,
-                        "object_id": 218932,
-                        "latitude": 44.4948179,
-                        "longitude": 11.33969,
-                        "address": "via Rismondo 2, Bologna",
-                        "gmaps_lookats": {
-                            "zoom": 16,
-                            "mapType": "k",
+                    "relations": {
+                        "attach": {
+                            "count": 8,
+                            "url": "https://example.com/api/objects/15/relation/attach"
+                        },
+                        "seealso": {
+                            "count": 2,
+                            "url": "https://example.com/api/objects/15/relation/seealso"
+                        }
+                    },
+                    "object_type": "Document",
+                    "authorized": true,
+                    "free_access": true,
+                    "custom_properties": {
+                        "bookpagenumber": "12",
+                        "number": "8"
+                    },
+                    "geo_tags": [
+                        {
+                            "id": 68799,
+                            "object_id": 218932,
                             "latitude": 44.4948179,
                             "longitude": 11.33969,
-                            "range": 44052.931589613
+                            "address": "via Rismondo 2, Bologna",
+                            "gmaps_lookats": {
+                                "zoom": 16,
+                                "mapType": "k",
+                                "latitude": 44.4948179,
+                                "longitude": 11.33969,
+                                "range": 44052.931589613
+                            }
                         }
-                    }
-                ],
-                "tags": [
-                    {
-                        "label": "tag one",
-                        "name": "tag-one"
-                    },
-                    {
-                        "label": "tag two",
-                        "name": "tag-two"
-                    }
-                ],
-                "categories": [
-                    {
-                        "id": 266,
-                        "area_id": null,
-                        "label": "category one",
-                        "name": "category-one"
-                    },
-                    {
-                        "id": 323,
-                        "area_id": null,
-                        "label": "category two",
-                        "name": "category-two"
-                    }
-                ]
-            }
-        },
-        "method": "get",
-        "params": [],
-        "url": "https://example.com/api/objects/218932"
-    }
-
-If *:name* corresponds to a **section** or a **publication** then the
-response will have ``data.object.children`` with the total count of
-children, count of contents, count of sections and the related url.
-
-.. code-block:: json
-
-    {
-        "children": {
-            "count": 14,
-            "url": "https://example.com/api/objects/1/children",
-            "contents": {
-                "count": 12,
-                "url": "https://example.com/api/objects/1/contents"
+                    ],
+                    "tags": [
+                        {
+                            "label": "tag one",
+                            "name": "tag-one"
+                        },
+                        {
+                            "label": "tag two",
+                            "name": "tag-two"
+                        }
+                    ],
+                    "categories": [
+                        {
+                            "id": 266,
+                            "area_id": null,
+                            "label": "category one",
+                            "name": "category-one"
+                        },
+                        {
+                            "id": 323,
+                            "area_id": null,
+                            "label": "category two",
+                            "name": "category-two"
+                        }
+                    ]
+                }
             },
-            "sections": {
-                "count": 2,
-                "url": "https://example.com/api/objects/1/sections"
+            "method": "get",
+            "params": [],
+            "url": "https://example.com/api/objects/15"
+        }
+
+    .. note::
+
+        Every object can have relations with other objects. The count of objects
+        related is in ``data.object.relations.<relation_name>`` where there are
+        ``count`` (the number of related objects) and ``url`` fields. The ``url``
+        is the complete API request url to get the object related, for example
+        https://example.com/api/objects/15/relations/attach
+
+    If *:name* corresponds to a **section** or a **publication** then the
+    response will contain ``data.object.children`` with the total count of
+    children, count of contents, count of sections and the related url.
+
+    .. code-block:: json
+
+        {
+            "children": {
+                "count": 14,
+                "url": "https://example.com/api/objects/1/children",
+                "contents": {
+                    "count": 12,
+                    "url": "https://example.com/api/objects/1/contents"
+                },
+                "sections": {
+                    "count": 2,
+                    "url": "https://example.com/api/objects/1/sections"
+                }
             }
         }
-    }
 
-Get a list of publication's descendants /objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get a collection of objects
+---------------------------
 
-**Request type: GET**
+The ``/objects`` endpoint can be used to retrieve a collection of objects.
 
-Return a paginated list of objects that are descendants of the frontend
-publication. The response will be an array of objects as shown below.
+Get publication's descendants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get a list of related objects /objects/:name/:filter\_type
+.. http:get:: /objects
+
+    Return a paginated list of objects that are descendants of the
+    related publication configured in ``app/config/frontend.ini.php``.
+    The response will be an array of objects as shown below.
+
+    :reqheader Authorization: optional ``access_token`` as Bearer token
+
+    :resheader Content-Type: application/json
+
+    :status 200: Success
+    :status 400: Malformed request
+    :status 401: The request is not authorized to access to protected publication
+    :status 403: The request is authorized but without sufficient permissions to access to protected publication
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /objects HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+    **Example response**:
+
+    For readability the fields of objects are limited to "title" but they are similar to :http:get:`/objects/(name)` example
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "api": "objects",
+            "data": {
+                "objects": [
+                    {
+                        "id": 2,
+                        "title": "title one"
+                    },
+                    {
+                        "id": 3,
+                        "title": "title two"
+                    },
+                    {
+                        "id": 4,
+                        "title": "title three"
+                    },
+                    {
+                        "id": 5,
+                        "title": "title four"
+                    },
+                    {
+                        "id": 6,
+                        "title": "title five"
+                    }
+                ]
+            },
+            "method": "get",
+            "paging": {
+                "page": 1,
+                "page_size": 5,
+                "page_count": 5,
+                "total": 50,
+                "total_pages": 10
+            },
+            "params": [],
+            "url": "https://example.com/api/objects/1/children"
+        }
+
+
+Get a list of related objects /objects/:name/:filter_type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /objects/(name)/(string:filter_type)
 
 Return a list of objects related to *:name* object using *:filter\_type*
 filter.
@@ -157,229 +244,366 @@ filter.
 (not supported yet), 'children', 'descendants', 'siblings', 'contents',
 'sections' and 'relations'
 
-The response will usually be an array of objects as:
-
-**Request type: GET**
-
-.. code-block:: json
-
-    {
-        "api": "objects",
-        "data": {
-            "objects": [
-                {
-                    "id": 100,
-                    "title": "my title",
-                    ...
-                },
-                {
-                    "id": 42,
-                    "title": "other title",
-                    ...
-                },
-                ...
-            ]
-        },
-        "method": "get",
-        "paging": {
-            "page": 1,
-            "page_size": 5,
-            "page_count": 5,
-            "total": 50,
-            "total_pages": 10
-        },
-        "params": [],
-        "url": "https://example.com/api/objects/1/children"
-    }
 
 .. _get-a-list-of-children:
 
-Get a list of children /objects/:name/children
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get object's children
+~~~~~~~~~~~~~~~~~~~~~
 
-It returns the paginated children of object *:name*.
+.. http:get:: /objects/(name)/children
 
-Get a list of children of type section /objects/:name/sections
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    Return the paginated children of an object.
+    The object has to be a section or the publication.
 
-It returns the paginated children of object *:name*. The children are
-just sections ('section BEdita object type)
+    .. include:: /fragments/objects_related_endpoint_desc.rst
 
-Get a list of children of type contents /objects/:name/contents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get object's children of type *section*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It returns the paginated children of object *:name*. The children are
-other than sections.
+.. http:get:: /objects/(name)/sections
 
-Get a list of descendants /objects/:name/descendants
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    Return the paginated children of an object.
+    The object has to be a section or the publication.
+    The children are just sections (*section BEdita object type*)
 
-It returns the paginated descendants of object *:name*.
+    .. include:: /fragments/objects_related_endpoint_desc.rst
 
-Get a list of siblings /objects/:name/siblings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get object's children of type *contents*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It returns the paginated siblings of object *:name*.
+.. http:get:: /objects/(name)/contents
+
+    Return the paginated children of an object.
+    The object has to be a section or the publication.
+    The children are other than sections.
+
+    .. include:: /fragments/objects_related_endpoint_desc.rst
+
+Get object's descendants
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /objects/(name)/descendants
+
+    Return the paginated children of an object.
+    The object has to be a section or the publication.
+    The children are other than sections.
+
+    .. include:: /fragments/objects_related_endpoint_desc.rst
+
+Get object's siblings
+~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /objects/(name)/siblings
+
+    Return the paginated siblings of an object.
+
+    .. include:: /fragments/objects_related_endpoint_desc.rst
+
 
 .. _get-relations-count:
 
-Get relations count /objects/:name/relations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get relations count
+~~~~~~~~~~~~~~~~~~~
 
-It returns a summary of relations information about *:name* object. It
-show every relation with the count and the url to get the related
-objects detail.
+.. http:get:: /objects/(name)/relations
 
-.. code-block:: json
+    Returns a summary of relations information about an object.
+    It shows every relation with the **count** and the **url** to get the related objects detail.
 
-    {
-        "api": "objects",
-        "data": {
-            "attach": {
-                "count": 1,
-                "url": "https://example.com/api/objects/1/relations/attach"
+    .. include:: /fragments/objects_related_endpoint_desc.rst
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /objects/15/relations HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "api": "objects",
+            "data": {
+                "attach": {
+                    "count": 1,
+                    "url": "https://example.com/api/objects/1/relations/attach"
+                },
+                "seealso": {
+                    "count": 2,
+                    "url": "https://example.com/api/objects/1/relations/seealso"
+                }
             },
-            "seealso": {
-                "count": 2,
-                "url": "https://example.com/api/objects/1/relations/seealso"
-            }
-        },
-        "method": "get",
-        "params": [],
-        "url": "https://example.com/api/objects/1/relations"
-    }
+            "method": "get",
+            "params": [],
+            "url": "https://example.com/api/objects/1/relations"
+        }
 
-Get the related objects detail /objects/:name/relations/:relation\_name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It returns the paginated list of objects related by *:relation\_name* to
-*:name* object.
+Get the related objects detail
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /objects/(name)/relations/(string:relation_name)
+
+    Return the paginated collection of objects related by *relation_name* to *name* object.
+
+    .. include:: /fragments/objects_related_endpoint_desc.rst
 
 .. _get-the-relation-detail:
 
-Get the relation detail /objects/:name/relations/:relation\_name/:related\_id
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get the relation detail between objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Request type: GET**
+.. http:get:: /objects/(name)/relations/(string:relation_name)/(int:related_id)
 
-It returns the relation *:relation\_name* detail from main object
-*:name* and related object *related\_id*
+    Returns the relation detail between two objects.
 
-.. code-block:: json
+    :reqheader Authorization: optional ``access_token`` as Bearer token
 
-    {
-      "api": "objects",
-      "data": {
-        "priority": 3,
-        "params": {
-          "label": "here the label"
+    .. include:: /fragments/objects_common_params.rst
+
+    :param string relation_name: the name of the relation that ties *name* and *related_id*
+    :param int related_id: the object id of the related object
+
+    :resheader Content-Type: application/json
+
+    .. include:: /fragments/objects_common_status.rst
+
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /objects/15/relations/attach/23 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+          "api": "objects",
+          "data": {
+            "priority": 3,
+            "params": {
+              "label": "here the label"
+            }
+          },
+          "method": "get",
+          "params": [],
+          "url": "https://example.com/api/objects/1/relations/attach/2"
         }
-      },
-      "method": "get",
-      "params": [],
-      "url": "https://example.com/api/objects/1/relations/attach/2"
-    }
 
-Get the child position /objects/:name/children/:child\_id
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get the child position
+~~~~~~~~~~~~~~~~~~~~~~
 
-**Request type: GET**
+.. http:get:: /objects/(name)/children/(int:child_id)
 
-It returns the position (``priority`` key) of *:child\_id* relative to
-all children of parent object *:name*
+    Return the position (``priority`` key) of *child_id* relative to
+    all children of parent object *name*
 
-.. code-block:: json
+    :reqheader Authorization: optional ``access_token`` as Bearer token
 
-    {
-      "api": "objects",
-      "data": {
-        "priority": 3
-      },
-      "method": "get",
-      "params": [],
-      "url": "https://example.com/api/objects/1/children/2"
-    }
+    .. include:: /fragments/objects_common_params.rst
 
-Create/update an object
------------------------
+    :param int child_id: the object id of the child of object *name*
 
-**Request type: POST**
+    :resheader Content-Type: application/json
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the object.
+    .. include:: /fragments/objects_common_status.rst
 
-Before save objects the frontend app that serve API has to be configured
-to know what objects can be written
+    **Example request**:
 
-.. code-block:: php
+    .. sourcecode:: http
 
-    $config['api'] = array(
-       ....
-        'validation' => array(
-            // to save 'document' and 'event' object types 
-            'writableObjects' => array('document', 'event')
-        )
-    );
+        GET /objects/1/children/2 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
 
-**Saving new objects** user has to be :doc:`authenticated </endpoints/auth>`
-and **data** from client must contain: \* ``object_type`` i.e. the
-object type you want to create \* at least a parent (``parents`` key)
-accessible (with right permission for user authorized) on publication
-tree or at least a relation (``relations`` key) with another object
-reachable (where *reachable* means an accessible object on tree or
-related to an accessible object on tree).
+    **Example response**:
 
-Example of valid data from client:
+    .. sourcecode:: http
 
-.. code-block:: json
+        HTTP/1.1 200 OK
+        Content-Type: application/json
 
-    {
-        "data": {
-            "title": "My title",
-            "object_type": "event",
-            "description": "bla bla bla",
-            "parents": [1, 34, 65],
-            "relations": {
-                "attach": [
+        {
+          "api": "objects",
+          "data": {
+            "priority": 3
+          },
+          "method": "get",
+          "params": [],
+          "url": "https://example.com/api/objects/1/children/2"
+        }
+
+Create an object
+----------------
+
+.. http:post:: /objects
+
+    Create a new BEdita object type.
+
+    .. important::
+
+        To write an object it has to be :doc:`configured to be writable </configuration>`
+
+        .. code-block:: php
+
+            $config['api'] = array(
+                // ....
+                'validation' => array(
+                    // to save 'document' and 'event' object types
+                    'writableObjects' => array('document', 'event')
+                )
+            );
+
+    The request body has to be a JSON as
+
+    .. code-block:: json
+
+        {
+            "data": {}
+        }
+
+    where inside ``"data"`` are placed all fields to save.
+    User has to be :doc:`authenticated </endpoints/auth>`
+    and ``"data": {}`` must contain: ``object_type`` i.e. the
+    object type you want to create at least a parent (``parents`` key)
+    accessible (with right permission for user authorized) on publication
+    tree or at least a relation (``relations`` key) with another object
+    reachable (where *reachable* means an accessible object on tree or
+    related to an accessible object on tree).
+
+    Required keys in JSON are shown below.
+
+    :reqheader Authorization: (**required**) ``access_token`` as Bearer token
+
+    :reqjson string data.object_type: (**required**) the object type to create
+    :reqjson array data.parents: (**required** if ``data.relations`` with conditions specified below missing) a list of parents.
+        Parents must be accessible (with right permission for user authorized) on publication
+        tree
+    :reqjson object data.relations: (**required** if ``data.parents`` with conditions specified above missing)
+        an object of relations where the keys are the relations' names. Every relation contains an array of objects of ``related_id``
+        and optionally of relation params
+
+        .. code-block:: json
+
+            {
+                "name1": [
                     {
-                        "related_id": 12,
-                        "params": {
-                            "label": "foobar"
-                        }
+                        "related_id": 1
                     },
                     {
-                        "related_id": 23
+                        "related_id": 2,
+                        "params": {
+                            "name_param_one": "value param one",
+                            "name_param_two": "value param two"
+                        }
                     }
                 ],
-                "seealso": [
+                "name2": [
                     {
-                        "related_id": 167
+                        "related_id": 3
                     }
                 ]
-            },
-            "categories": ["name-category-one", "name-category-two"],
-            "tags": ["name-tag_one", "name-tag-two"],
-            "geo_tags": [
-                {
-                    "title": "geo tag title",
-                    "address": "via ....",
-                    "latitude": 43.012,
-                    "longitude": 10.45
-                }
-            ],
-            "date_items": [
-                {
-                    "start_date": "2015-07-08T15:00:35+0200",
-                    "end_date": "2015-07-08T15:00:35+0200",
-                    "days": [0,3,4]
+            }
+
+    :resheader Content-Type: application/json
+    :status 201: Success, the object was created and return the object detail as in :http:get:`/objects/(name)`
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /objects HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
+
+        {
+            "data": {
+                "title": "My title",
+                "object_type": "event",
+                "description": "bla bla bla",
+                "parents": [1, 34, 65],
+                "relations": {
+                    "attach": [
+                        {
+                            "related_id": 12,
+                            "params": {
+                                "label": "foobar"
+                            }
+                        },
+                        {
+                            "related_id": 23
+                        }
+                    ],
+                    "seealso": [
+                        {
+                            "related_id": 167
+                        }
+                    ]
                 },
-                {
-                    "start_date": "2015-09-01T15:00:35+0200",
-                    "end_date": "2015-09-30T15:00:35+0200"
-                }
-            ]
+                "categories": ["name-category-one", "name-category-two"],
+                "tags": ["name-tag_one", "name-tag-two"],
+                "geo_tags": [
+                    {
+                        "title": "geo tag title",
+                        "address": "via ....",
+                        "latitude": 43.012,
+                        "longitude": 10.45
+                    }
+                ],
+                "date_items": [
+                    {
+                        "start_date": "2015-07-08T15:00:35+0200",
+                        "end_date": "2015-07-08T15:00:35+0200",
+                        "days": [0,3,4]
+                    },
+                    {
+                        "start_date": "2015-09-01T15:00:35+0200",
+                        "end_date": "2015-09-30T15:00:35+0200"
+                    }
+                ]
+            }
         }
-    }
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 201 Created
+        Content-Type: application/json
+
+        {
+          "api": "objects",
+          "data": {
+              "id": 45,
+              "title": "My title",
+              "object_type": "event",
+              "description": "bla bla bla"
+          },
+          "method": "post",
+          "params": [],
+          "url": "https://example.com/api/objects"
+        }
+
+    The response payload contains the created object detail. *In the example above only some fileds are shown*.
+
+
 
 dates must be in ISO 8601 format. In case of **success** a **201
 Created** HTTP status code is returned with the detail of object created

@@ -1,18 +1,33 @@
 Auhtentication
 ==============
 
-By default all GET requests don't require client and user
-authenticatication unless the object requested has permission on it. In
-that case the user has to be authenticated before require the resource.
-Other operations as writing/deleting objects (POST, PUT, DELETE on
-``/objects`` endpoint) are always protected instead and they always
-require authentication.
+Terminology
+-----------
 
-The API follow a **token based authentication flow** using a `Json Web
-Token <http://jwt.io>`_ as ``access_token`` and an opaque token as
-``refresh_token`` useful to renew the ``access_token`` without ask again
-the user credentials. See :doc:`here </endpoints/auth>` to more details on
-how to obtain ``access_token`` and ``refresh_token``.
+.. glossary::
+    :sorted:
+
+    Access token
+        A string granted by the authorization server used to identify the issuer of a request.
+        The access token has to be send to the resource server every time that the client want
+        to access to protected resources.
+        BEdita Rest API use :term:`Json Web Token` as access token.
+
+    Refresh token
+        An opaque token issued by the authorization server. It is usefult to renew an :term:`access token`
+        without send the user credentials again. This token doesn't expire.
+
+    Json Web Token
+    JWT
+        JSON Web Tokens are an open, industry standard `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_
+        method for representing claims securely between two parties.
+        More info `here <http://jwt.io>`_.
+
+Architecture
+------------
+
+The API follow a **token based authentication flow** using a :term:`Json Web
+Token` as :term:`access token` and an opaque token as :term:`refresh token`.
 
 ::
 
@@ -36,22 +51,30 @@ how to obtain ``access_token`` and ``refresh_token``.
     |        |<-(F)--- Protected Resource ---------|               |
     +--------+                                     +---------------+
 
-The ``access_token`` must be used in every request that require
-permission. To use the ``access_token`` it has to be sent in HTTP
+The :term:`access token` must be used in every request that requires
+permission or to get protected resources.
+To use the :term:`access token` it has to be sent in HTTP
 headers as **bearer token** ``Authorization: Bearer eyJ0eXAi.....``.
 
-.. important::
+Usually :term:`JWT` payload contains the user ``id`` and is something like
 
-    Because of JWT is digital signed using ``'Security.salt'`` you should
-    always remember to change it in ``app/config/core.php`` file:
+.. code-block:: json
 
-    .. code-block:: php
+    {
+        "iss": "https://example.com",
+        "iat": "1441749523",
+        "exp": "1441707000",
+        "id": "15"
+    }
 
-        Configure::write('Security.salt', 'my-security-random-string');
+.. include:: /fragments/jwt_important.rst
 
-    It is possible to invalidate all ``access_token`` released simply
-    changing that value.
-
+By default all :http:method:`get` requests don't require client and user
+authentication unless the object requested has permission on it. In
+that case the user has to be authenticated before require the resource.
+Other operations as writing/deleting objects (:http:method:`post`, :http:method:`put`, :http:method:`delete` on
+``/objects`` endpoint) are always protected instead and they always
+require authentication.
 
 All the logic to handle authentication is in ``ApiAuth`` component and
 ``ApiBaseController`` use it for you so authentication works out of the

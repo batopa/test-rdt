@@ -22,3 +22,10 @@ customized for frontend needs.
    customize_endpoints
    formatting_bedita_objects
    endpoints/index
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`search`
+* `HTTP Routing Table <http-routingtable.html>`_
