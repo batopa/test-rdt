@@ -4,7 +4,7 @@ Objects ``/objects``
 Get an object
 -------------
 
-.. http:get:: /objects/(name)
+.. http:get:: /objects/(object_id)
 
     Get an object detail.
 
@@ -132,7 +132,7 @@ Get an object
         is the complete API request url to get the object related, for example
         https://example.com/api/objects/15/relations/attach
 
-    If *:name* corresponds to a **section** or a **publication** then the
+    If *object_id* corresponds to a **section** or a **publication** then the
     response will contain ``data.object.children`` with the total count of
     children, count of contents, count of sections and the related url.
 
@@ -167,7 +167,7 @@ Get publication's descendants
     related publication configured in ``app/config/frontend.ini.php``.
     The response will be an array of objects as shown below.
 
-    :reqheader Authorization: optional ``access_token`` as Bearer token
+    :reqheader Authorization: optional :term:`access token`
 
     :resheader Content-Type: application/json
 
@@ -186,7 +186,7 @@ Get publication's descendants
 
     **Example response**:
 
-    For readability the fields of objects are limited to "title" but they are similar to :http:get:`/objects/(name)` example
+    For readability the fields of objects are limited to "title" but they are similar to :http:get:`/objects/(object_id)` example
 
     .. sourcecode:: http
 
@@ -232,27 +232,14 @@ Get publication's descendants
         }
 
 
-Get a list of related objects /objects/:name/:filter_type
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /objects/(name)/(string:filter_type)
-
-Return a list of objects related to *:name* object using *:filter\_type*
-filter.
-
-*:filter\_type* value can be 'ancestors' (not supported yet), 'parents'
-(not supported yet), 'children', 'descendants', 'siblings', 'contents',
-'sections' and 'relations'
-
-
 .. _get-a-list-of-children:
 
 Get object's children
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/children
+.. http:get:: /objects/(object_id)/children
 
-    Return the paginated children of an object.
+    Return the paginated children of object *object_id*.
     The object has to be a section or the publication.
 
     .. include:: /fragments/objects_related_endpoint_desc.rst
@@ -260,9 +247,9 @@ Get object's children
 Get object's children of type *section*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/sections
+.. http:get:: /objects/(object_id)/sections
 
-    Return the paginated children of an object.
+    Return the paginated children of object *object_id*.
     The object has to be a section or the publication.
     The children are just sections (*section BEdita object type*)
 
@@ -271,9 +258,9 @@ Get object's children of type *section*
 Get object's children of type *contents*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/contents
+.. http:get:: /objects/(object_id)/contents
 
-    Return the paginated children of an object.
+    Return the paginated children of object *object_id*.
     The object has to be a section or the publication.
     The children are other than sections.
 
@@ -282,9 +269,9 @@ Get object's children of type *contents*
 Get object's descendants
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/descendants
+.. http:get:: /objects/(object_id)/descendants
 
-    Return the paginated children of an object.
+    Return the paginated children of object *object_id*.
     The object has to be a section or the publication.
     The children are other than sections.
 
@@ -293,9 +280,9 @@ Get object's descendants
 Get object's siblings
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/siblings
+.. http:get:: /objects/(object_id)/siblings
 
-    Return the paginated siblings of an object.
+    Return the paginated siblings of object *object_id*.
 
     .. include:: /fragments/objects_related_endpoint_desc.rst
 
@@ -305,9 +292,9 @@ Get object's siblings
 Get relations count
 ~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/relations
+.. http:get:: /objects/(object_id)/relations
 
-    Returns a summary of relations information about an object.
+    Returns a summary of relations information about object *object_id*.
     It shows every relation with the **count** and the **url** to get the related objects detail.
 
     .. include:: /fragments/objects_related_endpoint_desc.rst
@@ -344,13 +331,14 @@ Get relations count
             "url": "https://example.com/api/objects/1/relations"
         }
 
+.. _get-relations-objects_detail:
 
 Get the related objects detail
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/relations/(string:relation_name)
+.. http:get:: /objects/(object_id)/relations/(string:relation_name)
 
-    Return the paginated collection of objects related by *relation_name* to *name* object.
+    Return the paginated collection of objects related by *relation_name* to object *object_id*.
 
     .. include:: /fragments/objects_related_endpoint_desc.rst
 
@@ -359,15 +347,15 @@ Get the related objects detail
 Get the relation detail between objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/relations/(string:relation_name)/(int:related_id)
+.. http:get:: /objects/(object_id)/relations/(string:relation_name)/(int:related_id)
 
-    Returns the relation detail between two objects.
+    Returns the relation detail between object *object_id* and *related_id*.
 
-    :reqheader Authorization: optional ``access_token`` as Bearer token
+    :reqheader Authorization: optional :term:`access token`
 
     .. include:: /fragments/objects_common_params.rst
 
-    :param string relation_name: the name of the relation that ties *name* and *related_id*
+    :param string relation_name: the name of the relation that ties *object_id* and *related_id*
     :param int related_id: the object id of the related object
 
     :resheader Content-Type: application/json
@@ -407,16 +395,16 @@ Get the relation detail between objects
 Get the child position
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /objects/(name)/children/(int:child_id)
+.. http:get:: /objects/(object_id)/children/(int:child_id)
 
     Return the position (``priority`` key) of *child_id* relative to
-    all children of parent object *name*
+    all children of parent object *object_id*
 
-    :reqheader Authorization: optional ``access_token`` as Bearer token
+    :reqheader Authorization: optional :term:`access token`
 
     .. include:: /fragments/objects_common_params.rst
 
-    :param int child_id: the object id of the child of object *name*
+    :param int child_id: the object id of the child of object *object_id*
 
     :resheader Content-Type: application/json
 
@@ -447,6 +435,8 @@ Get the child position
           "url": "https://example.com/api/objects/1/children/2"
         }
 
+.. _create_object:
+
 Create an object
 ----------------
 
@@ -454,19 +444,7 @@ Create an object
 
     Create a new BEdita object type.
 
-    .. important::
-
-        To write an object it has to be :doc:`configured to be writable </configuration>`
-
-        .. code-block:: php
-
-            $config['api'] = array(
-                // ....
-                'validation' => array(
-                    // to save 'document' and 'event' object types
-                    'writableObjects' => array('document', 'event')
-                )
-            );
+    .. include:: /fragments/objects_writable_important.rst
 
     The request body has to be a JSON as
 
@@ -487,7 +465,7 @@ Create an object
 
     Required keys in JSON are shown below.
 
-    :reqheader Authorization: (**required**) ``access_token`` as Bearer token
+    :reqheader Authorization: (**required**) :term:`access token`
 
     :reqjson string data.object_type: (**required**) the object type to create
     :reqjson array data.parents: (**required** if ``data.relations`` with conditions specified below missing) a list of parents.
@@ -520,7 +498,8 @@ Create an object
             }
 
     :resheader Content-Type: application/json
-    :status 201: Success, the object was created and return the object detail as in :http:get:`/objects/(name)`
+    :resheader Location: The url to the resource just created ``https://example.com/objects/(object_id)``
+    :status 201: Success, the object was created. Return the object detail as in :http:get:`/objects/(object_id)`
     :status 400: Required parameters are missing or the request is malformed
     :status 401: Request is not authorized
 
@@ -603,258 +582,356 @@ Create an object
 
     The response payload contains the created object detail. *In the example above only some fileds are shown*.
 
+    dates must be in ISO 8601 format.
 
+Update an object
+----------------
 
-dates must be in ISO 8601 format. In case of **success** a **201
-Created** HTTP status code is returned with the detail of object created
-in the response body.
+.. http:post:: /objects
 
-You can use POST also to **update an existent object**. In that case the
-object ``id`` has to be passed in "data" object from client and
-``object_type`` can be omitted.
+    Update an existent object.
 
-Add/edit relations
-------------------
+    .. include:: /fragments/objects_writable_important.rst
 
-**Request type: POST**
+    :http:method:`post` request can be also used to **update an existent object**. In that case the
+    object ``id`` has to be passed in ``"data"`` (as :ref:`creating object <create_object>`) and ``object_type`` can be omitted.
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the object.
+    :reqheader Authorization: (**required**) :term:`access token`
 
-In order to add or edit relations you can use the endpoint ``/objects``
-as ``/objects/:name/relations/:relation_name`` where *:name* can be the
-object id or nickname. and *:relation\_name* the relation name.
-Relations data must be an array of relation data or an object with
-relation data if you need to save only one relation (note that it is the
-same that send an array with only one relation).
+    :reqjson string data.id: (**required**) the id of the object to update
 
--  ``related_id`` is the related object id and is mandatory
--  ``params`` fields depend from relation type (optional)
--  ``priority``\ is the position of the relation. Relation with lower
-   priority are shown before (optional)
+    :resheader Content-Type: application/json
+    :status 200: Success, the object was updated. Return the object detail as in :http:get:`/objects/(object_id)`
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
 
-For example to add/edit attach relations to object with id 3 you can do
-a request:
+Create or update relations between objects
+------------------------------------------
 
-``POST /objects/3/relations/attach``
+.. http:post:: /objects/(object_id)/relations/(string:relation_name)
 
-valid data can be:
+    Create relations *relation_name* between *object_id* and other objects.
+    If the relation between objects already exists then it will be updated.
 
-.. code-block:: json
+    Request data must be an array of relation data or only a
+    relation data if you need to save only one relation.
 
-    {
-        "data": [
-            {
-                "related_id": 15,
-                "params": {
-                    "label": "my label"
-                }
-            },
-            {
-                "related_id": 28
-            }
-        ]
-    }
+    :reqheader Authorization: (**required**) :term:`access token`
 
-to create/update a bunch of relations, or
+    :reqjsonarr string related_id: (**required**) the related object id
+    :reqjsonarr string params: (**optional**) it depends from relation type
+    :reqjsonarr string priority: (**optional**) is the position of the relation.
+        Relation with lower priority are shown before.
 
-.. code-block:: json
+    :resheader Content-Type: application/json
+    :resheader Location: If at least a new relation was created (:http:statuscode:`201`).
+        The url to :ref:`collection of related objects <get-relations-objects_detail>`
+    :status 200: Success but no new relation was created.
+    :status 201: Success and at least a new relation was created.
+        Return the object detail as in :http:get:`/objects/(object_id)`
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
 
-    {
-        "data": {
-            "related_id": 34,
-            "priority": 3
-        }
-    }
+    **Example request to create/update only one relation**:
 
-to create/update only one relation.
+    .. sourcecode:: http
 
-If a "relation\_name" relation between main object and related object
-not exists then it is created else it is updated. If at least a relation
-is created a **201 Created** HTTP status code is sent and an HTTP header
-**Location** is set with url of :ref:`list of related objects <get-relations-count>`.
+        POST /objects/3/relations/attach HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
 
-The response body will be an array of relation data just saved.
-
-Saving new relations you can pass the ``priority`` you want to set. If
-no ``priority`` is passed it is automatically calculated starting from
-the max ``priority`` in the current relation.
-
-Edit (replace) relation data between objects
---------------------------------------------
-
-**Request type: PUT**
-
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the objects.
-
-In order to edit the relation data between two objects you can use the
-endpoint ``/objects`` as
-``/objects/:name/relations/:relation_name/:related_id`` where *:name*
-can be the object id or nickname, *:relation\_name* the relation name
-and *:related\_id* the related object id. Relations data must be an
-object with data
-
--  ``params`` fields depend from relation type
--  ``priority`` is the position of the relation. Relation with lower
-   priority are shown before
-
-At least ``params`` or ``priority`` must be defined. If one of these is
-not passed it will be set to ``null``.
-
-So to edit attach relation between object 1 and 2 the request will be
-
-``PUT /objects/1/relations/attach/2``
-
-.. code-block:: json
-
-    {
-        "data": {
-            "priority": 3,
-            "params": {
-                "label": "new label"
-            }
-        }
-    }
-
-In case of success the server will respond with a **200 HTTP status
-code** and the response body will be the same of :ref:`Get the relation detail <get-the-relation-detail>`
-
-Add/edit children
------------------
-
-**Request type: POST**
-
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the object.
-
-In order to add or edit children to a area/section object type you can
-use the endpoint ``/objects`` as ``/objects/:name/children`` where
-*:name* can be the object id or nickname. Children data must be an array
-of child data or an object with child data if you need to save only one
-child (note that it is the same that send an array with only one child).
-
--  ``child_id`` is the child object id and is mandatory
--  ``priority`` is the position of the child on the tree
-
-For example to add/edit children to object with id 3 you can do a
-request:
-
-``POST /objects/3/children``
-
-valid data can be:
-
-.. code-block:: json
-
-    {
-        "data": [
-            {
-                "child_id": 15,
+        {
+            "data": {
+                "related_id": 34,
                 "priority": 3
-            },
-            {
-                "child_id": 28
             }
-        ]
-    }
-
-to create/update a bunch of children, or
-
-.. code-block:: json
-
-    {
-        "data": {
-            "child_id": 34,
-            "priority": 3
         }
-    }
 
-to create/update only one child.
+    **Example request to create/update a bunch of relations**:
 
-If a "child\_id" is a new children for parent object then it is created
-on tree else it is updated. If at least a new child is created a **201
-Created** HTTP status code is sent and an HTTP header **Location** is
-set with url of :ref:`list of children objects <get-a-list-of-children>`.
+    .. sourcecode:: http
 
-The response body will be an array of children data just saved.
+        POST /objects/3/relations/attach HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
 
-Saving new children you can pass the ``priority`` you want to set i.e.
-the position on the tree. If no ``priority`` is passed every new
-children is appended to parent on tree structure.
+        {
+            "data": [
+                {
+                    "related_id": 15,
+                    "params": {
+                        "label": "my label"
+                    }
+                },
+                {
+                    "related_id": 28
+                }
+            ]
+        }
 
-Edit children position
-----------------------
+    **Example response**:
 
-**Request type: PUT**
+    .. sourcecode:: http
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the objects.
+        HTTP/1.1 201 Created
+        Host: example.com
+        Location: https://example.com/objects/3/relations/attach
+        Accept: application/json, text/javascript
+        Content-Type: application/json
 
-In order to edit children position you can use the endpoint ``/objects``
-as ``/objects/:name/children/:child_id`` where *:name* can be the object
-id or nickname and *:child\_id* is the children object id. Data passed
-must contain ``priority`` field that is the position of child you want
-to update.
+    The response body will be the same as :http:get:`/objects/(object_id)/relations/(string:relation_name)`
 
-For example to edit the position of child with id 2 of parent with id 1:
 
-``PUT /objects/1/children/2``
+Replace relation data between objects
+--------------------------------------
 
-.. code-block:: json
+.. http:put:: /objects/(object_id)/relations/(string:relation_name)/(int:related_id)
 
-    {
-        "data": {
+    Replace the relation *relation_name* data between *object_id* and *related_id*.
+
+    :reqheader Authorization: (**required**) :term:`access token`
+
+    :reqjson string related_id: (**required**) the related object id
+    :reqjson string params: (**optional**) it depends from relation type
+    :reqjson string priority: (**optional**) is the position of the relation.
+        Relation with lower priority are shown before.
+
+    :resheader Content-Type: application/json
+    :status 200: Success
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+
+    At least ``params`` or ``priority`` must be defined. If one of these is not passed it will be set to ``null``.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        PUT /objects/1/relations/attach/2 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
+
+        {
+            "data": {
+                "priority": 3,
+                "params": {
+                    "label": "new label"
+                }
+            }
+        }
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 Success
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
+
+    The response body will be the same as :http:get:`/objects/(object_id)/relations/(string:relation_name)/(int:related_id)`
+
+Add or edit children
+--------------------
+
+.. http:post:: /objects/(object_id)/children
+
+    Add or edit children to area/section object type  identified by *object_id*
+
+    Request data must be an array of child data or only a
+    child data if you need to save only one child.
+
+    :reqheader Authorization: (**required**) :term:`access token`
+
+    :reqjsonarr string child_id: (**required**) the child object id
+    :reqjsonarr string priority: (**optional**) is the position of the child on the tree.
+        Relation with lower priority are shown before.
+
+    :resheader Content-Type: application/json
+    :resheader Location: If at least a new child was created (:http:statuscode:`201`)
+        it contains the url to :ref:`collection of children objects <get-a-list-of-children>`.
+    :status 200: Success but all objects already were children of *object_id*.
+        The children position (``priority``) could be changed.
+        Response body is the children detail :http:get:`/objects/(object_id)/children`
+    :status 201: Success and at least a new child was added to parent *object_id*.
+        Response body is the children detail :http:get:`/objects/(object_id)/children`.
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+
+    **Example request to add/edit many children**:
+
+    .. sourcecode:: http
+
+        POST /objects/3/children HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
+
+        {
+            "data": [
+                {
+                    "child_id": 15,
+                    "priority": 3
+                },
+                {
+                    "child_id": 28
+                }
+            ]
+        }
+
+    **Example request to add/edit one child**:
+
+    .. sourcecode:: http
+
+        POST /objects/3/children HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
+
+        {
+            "data": {
+                "child_id": 34,
+                "priority": 3
+            }
+        }
+
+    The response body will be the same as :http:get:`/objects/(object_id)/children`
+
+Update child position
+---------------------
+
+.. http:put:: /objects/(object_id)/children/(int:child_id)
+
+    Change the child position inside the children of *object_id*.
+
+    :reqheader Authorization: (**required**) :term:`access token`
+
+    :reqjson string priority: (**required**) the position of child object id
+
+    :resheader Content-Type: application/json
+    :status 200: Success. Children position (``priority``) updated.
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /objects/1/children/2 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+        Content-Type: application/json
+
+        {
+            "data": {
+                "priority": 5
+            }
+        }
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+          "api": "objects",
+          "data": {
             "priority": 5
+          },
+          "method": "get",
+          "params": [],
+          "url": "https://example.com/api/objects/1/children/2"
         }
-    }
 
 Delete an object
 ----------------
 
-**Request type: DELETE**
+.. http:delete:: /objects/(object_id)
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the object.
+    Delete the object *object_id*
 
-To delete an object has to be used the endpoint ``/objects/:name`` where
-*:name* can be the object id or nickname.
+    :reqheader Authorization: (**required**) :term:`access token`
 
-If the object is deleted successfully a **204 No Content** HTTP status
-code is sent. Further requests to delete the same object will return a
-**404 Not Found** HTTP status code.
+    :resheader Content-Type: application/json
+    :status 204: The object was deleted.
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+    :status 404: The object to delete not exists or it has already been removed
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        DELETE /objects/15 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 204 No Content
 
 Delete a relation between objects
 ---------------------------------
 
-**Request type: DELETE**
+.. http:delete:: /objects/(object_id)/relations/(string:relation_name)/(int:related_id)
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the object.
+    Delete the relation *relation_name* between *object_id* and *related_id*
 
-In order to delete an existent relation between two objects you can use
-the endpoint ``/objects/:name/relations/:rel_name/:related_id`` where
-*:name* is the object id or nickname, *:rel\_name* is the relation name
-between objects and *:related\_id* is the object id related to object
-*:name*.
+    :reqheader Authorization: (**required**) :term:`access token`
 
-If the relation is succesfully deleted *204 No Content* HTTP status code
-is sent. Further requests to delete the same relation will return a **404
-Not Found** HTTP status code.
+    :resheader Content-Type: application/json
+    :status 204: The relation *relation_name* between *object_id* and *related_id* was deleted.
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+    :status 404: The relation *relation_name* between *object_id* and *related_id*
+        not exists or it has already been removed
 
-Remove child from a parent
---------------------------
+    **Example request**:
 
-**Request type: DELETE**
+    .. sourcecode:: http
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
-and has to have the permission to access to the object.
+        DELETE /objects/10/relations/seealso/36 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
 
-To remove an existent child of an object the endpoint
-``/objects/:name/children/:child_id`` can be used, where *:name* is the
-object id or nickname of parent and *:child\_id* is id of the child
-object. Note that the child will be only removed from parent's tree but
-it continue to exist.
+    **Example response**:
 
-If *:child\_id* is succesfully removed from *:name* children a **204 No
-Content** HTTP status code is sent. Further requests to remove the same
-child will return a **404 Not Found** HTTP status code.
+    .. sourcecode:: http
+
+        HTTP/1.1 204 No Content
+
+Remove a child from a parent
+----------------------------
+
+.. http:delete:: /objects/(object_id)/children/(int:child_id)
+
+    Remove *child_id* from *object_id* children
+
+    :reqheader Authorization: (**required**) :term:`access token`
+
+    :resheader Content-Type: application/json
+    :status 204: *child_id* was removed from *object_id* children.
+    :status 400: Required parameters are missing or the request is malformed
+    :status 401: Request is not authorized
+    :status 404: *child_id* not exists or it has already been removed from *object_id* children.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        DELETE /objects/1/children/3 HTTP/1.1
+        Host: example.com
+        Accept: application/json, text/javascript
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 204 No Content

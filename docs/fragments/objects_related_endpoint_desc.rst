@@ -1,4 +1,4 @@
-:reqheader Authorization: optional ``access_token`` as Bearer token
+:reqheader Authorization: optional ``access_token``
 
 .. include:: /fragments/objects_common_params.rst
 

@@ -1,8 +1,8 @@
 Authentication ``/auth``
 ========================
 
-It used to retrieve an ``access_token`` to access protected items, renew
-``access_token`` and remove permissions. The ``access_token`` is a `Json Web Token <http://jwt.io>`_
+It used to retrieve an :term:`access token` to access protected items, renew
+:term:`access token` and remove permissions. The :term:`access token` is a `Json Web Token <http://jwt.io>`_
 (`IETF <https://tools.ietf.org/html/rfc7519>`_). More info on :doc:`authentication </authentication>`
 
 .. include:: /fragments/jwt_important.rst
@@ -12,14 +12,14 @@ Obtain an access token
 
 .. http:post:: /auth
 
-    Authenticate an user to obtain an ``access_token``.
+    Authenticate an user to obtain an :term:`access token`.
 
     :reqjson string username: the username
     :reqjson string password: the password
     :reqjson string grant_type: `"password"`, the grant type to apply (password is the default, it can be ommitted)
 
     :resheader Content-Type: application/json
-    :status 200: response contains ``access_token`` and ``refresh_token``
+    :status 200: response contains :term:`access token` and :term:`refresh token`
     :status 400: when required parameters are missing or the request is malformed
     :status 401: when authentication fails
 
@@ -65,9 +65,9 @@ Obtain an access token
 
         ::
 
-            Authorization: Bearer eyJ0eXAi.....
+            Authorization: Bearer <token>
 
-        or as query string ``/api/endpoint?access_token=eyJ0eXAi.....``
+        or as query string ``/api/endpoint?access_token=<token>``
 
 Renew the access token
 ----------------------
@@ -79,13 +79,13 @@ by refresh token. **In this case do not pass the expired access token**
 
     Renew an `access_token`.
 
-    :reqjson string refresh_token: the ``refresh_token`` to use to renew ``access_token``
+    :reqjson string refresh_token: the :term:`refresh token` to use to renew :term:`access token`
     :reqjson string grant_type: `"refresh_token"`, the grant type to apply
 
     :resheader Content-Type: application/json
-    :status 200: respond with `access_token` and `refresh_token`
+    :status 200: Success, it responds with the new :term:`access token` and :term:`refresh token`
     :status 400: when required parameters are missing or the request is malformed
-    :status 401: when ``refresh_token`` is invalid
+    :status 401: when :term:`refresh token` is invalid
 
     **Example request**:
 
@@ -125,14 +125,14 @@ Get the updated time to access token expiration
 
 .. http:get:: /auth
 
-    It returns the updated ``expires_in`` time for ``access_token``
+    It returns the updated ``expires_in`` time for :term:`access token`
 
-    :reqheader Authorization: the ``access_token`` as Bearer token
+    :reqheader Authorization: the :term:`access token` as Bearer token
 
     :resheader Content-Type: application/json
     :status 200: no error, payload contains the updated ``expires_in`` value
     :status 400: the request is malformed
-    :status 401: the ``access_token`` is invalid
+    :status 401: the :term:`access token` is invalid
 
     **Example request**:
 
@@ -160,19 +160,19 @@ Get the updated time to access token expiration
             "url": "https://example.com/api/auth"
         }
 
-Revoking a ``refresh_token``
-----------------------------
+Revoking a :term:`refresh token`
+--------------------------------
 
-In order to invalidate an ``access_token`` you need to remove it from client and revoke the ``refresh_token``
+In order to invalidate an :term:`access token` you need to remove it from client and revoke the :term:`refresh token`
 
 .. http:delete:: /auth/(string:refresh_token)
 
-    Revoke a ``refresh_token``
+    Revoke a :term:`refresh token`
 
-    :reqheader Authorization: the ``access_token`` as Bearer token
-    :param string refresh_token: the ``refresh_token`` to revoke
+    :reqheader Authorization: the :term:`access token` as Bearer token
+    :param string refresh_token: the :term:`refresh token` to revoke
 
     :status 204: the refresh token was deleted
     :status 400: the request is malformed
-    :status 401: the ``access_token`` is invalid or
-    :status 404: the ``refresh_token`` was already revoked or not exists
+    :status 401: the :term:`access token` is invalid or
+    :status 404: the :term:`refresh token` was already revoked or not exists

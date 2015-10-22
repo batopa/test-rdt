@@ -1,32 +1,51 @@
 Auhtentication
 ==============
 
-Terminology
------------
+Key concepts
+------------
 
 .. glossary::
     :sorted:
 
     Access token
         A string granted by the authorization server used to identify the issuer of a request.
-        The access token has to be send to the resource server every time that the client want
+        The access token has to be sent to the resource server every time that the client want
         to access to protected resources.
-        BEdita Rest API use :term:`Json Web Token` as access token.
+
+        BEdita REST API uses :term:`JSON Web Token` as access token.
+        It can be sent as ``Authorization`` HTTP header (preferred) using a ``Bearer`` scheme
+
+        ::
+
+            Authorization: Bearer <token>
+
+        or as query string ``/endpoint?access_token=<token>``
 
     Refresh token
-        An opaque token issued by the authorization server. It is usefult to renew an :term:`access token`
-        without send the user credentials again. This token doesn't expire.
+        An opaque token issued by the authorization server. It is useful to renew an expired :term:`access token`
+        without send the user credentials again. This token doesn't expire but can be revoked by
+        :http:delete:`/auth/(string:refresh_token)`
 
-    Json Web Token
+    JSON Web Token
     JWT
         JSON Web Tokens are an open, industry standard `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_
         method for representing claims securely between two parties.
+
+        A JWT is composed by three parts:
+
+        * an **header** containing informations about the token type and algorithm used. It is Base64URL encoded.
+        * a **payload** containing informations in the form of claims (informations we want to transmit).
+          It is Base64URL encoded.
+        * a **signature** used to verify the authenticity of the JWT using an valid algorithm defined by
+          `JSON Web Signature (JWS) <https://tools.ietf.org/html/rfc7515>`_
+          specification (for example a shared secret `HMAC <https://tools.ietf.org/html/rfc7515#page-36>`_).
+
         More info `here <http://jwt.io>`_.
 
 Architecture
 ------------
 
-The API follow a **token based authentication flow** using a :term:`Json Web
+The API follow a **token based authentication flow** using a :term:`JSON Web
 Token` as :term:`access token` and an opaque token as :term:`refresh token`.
 
 ::
@@ -51,12 +70,7 @@ Token` as :term:`access token` and an opaque token as :term:`refresh token`.
     |        |<-(F)--- Protected Resource ---------|               |
     +--------+                                     +---------------+
 
-The :term:`access token` must be used in every request that requires
-permission or to get protected resources.
-To use the :term:`access token` it has to be sent in HTTP
-headers as **bearer token** ``Authorization: Bearer eyJ0eXAi.....``.
-
-Usually :term:`JWT` payload contains the user ``id`` and is something like
+Usually :term:`JWT` payload contains the user ``id`` and some public claims, for example
 
 .. code-block:: json
 

@@ -1,6 +1,6 @@
 .. important::
 
-    Because of JWT is digital signed using ``'Security.salt'`` you should
+    Because of :term:`JWT` is digital signed using ``'Security.salt'`` you should
     always remember to change it in ``app/config/core.php`` file:
 
     .. code-block:: php
