@@ -14,23 +14,6 @@
 
 import sys
 import os
-from sphinx.highlighting import lexers
-from pygments.lexers.web import PhpLexer
-
-def setup(app):
-    app.add_stylesheet('api_methods.css')
-
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
-
-    html_theme = 'sphinx_rtd_theme'
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-
-# Set up PHP syntax highlights
-lexers["php"] = PhpLexer(startinline=True, linenos=1)
-lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
-primary_domain = "php"
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -51,7 +34,7 @@ extensions = ['sphinxcontrib.httpdomain', 'sphinxcontrib.phpdomain']
 templates_path = ['_templates']
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+# source_suffix = '.rst'
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -273,3 +256,29 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# PHP support
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
+# Set up PHP syntax highlights
+lexers["php"] = PhpLexer(startinline=True, linenos=1)
+lexers["php-annotations"] = PhpLexer(startinline=True, linenos=1)
+primary_domain = "php"
+
+# read the docs theme support
+def setup(app):
+    app.add_stylesheet('api_methods.css')
+
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if not on_rtd:  # only import and set the theme if we're building docs locally
+    import sphinx_rtd_theme
+
+    html_theme = 'sphinx_rtd_theme'
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# Markdown support
+from recommonmark.parser import CommonMarkParser
+
+source_parsers = {'.md': CommonMarkParser}
+source_suffix = ['.rst', '.md']

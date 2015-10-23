@@ -1,14 +1,22 @@
-User profile
-============
+User profile ``/me``
+====================
 
-endpoint: /me
--------------
+.. warning::
+
+   This endpoint is highly volatile. It could be completely changed
+   or removed in next versions.
 
 Obtain information about authenticated user
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------
 
-**Request type: GET**
+.. http:get:: /me
 
-**Conditions:** User has to be :doc:`authenticated </endpoints/auth>`
+    Return information about current authenticated user
 
-Return information about current authenticated user
+    :reqheader Authorization: (**required**) :term:`access token`
+
+    :resheader Content-Type: application/json
+
+    :status 200: Success
+    :status 401: The request is not authorized
+    :status 404:
