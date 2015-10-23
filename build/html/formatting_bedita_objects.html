@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Formatting BEdita objects &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="API reference" href="endpoints/index.html"/>
+        <link rel="prev" title="Customize endpoints" href="customize_endpoints.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup a frontend to consume API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Auhtentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_endpoints.html">Customize endpoints</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Formatting BEdita objects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introducing-the-apiformatter-component">Introducing the <code class="docutils literal"><span class="pre">ApiFormatter</span></code> Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#help-apiformatter-to-cast-object-fields-in-the-right-way">Help ApiFormatter to cast object fields in the right way</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-unwanted-fields">Remove unwanted fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-fields-to-remove-from-configuration">Add fields to remove from configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-fields-to-remove-on-the-fly">Add fields to remove on the fly</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#keep-fields-that-are-removed-by-default">Keep fields that are removed by default</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-fields-to-keep-from-configuration">Add fields to keep from configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-fields-to-keep-on-the-fly">Add fields to keep on the fly</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Formatting BEdita objects</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/formatting_bedita_objects.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="formatting-bedita-objects">
+<h1>Formatting BEdita objects<a class="headerlink" href="#formatting-bedita-objects" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introducing-the-apiformatter-component">
+<h2>Introducing the <code class="docutils literal"><span class="pre">ApiFormatter</span></code> Component<a class="headerlink" href="#introducing-the-apiformatter-component" title="Permalink to this headline">¶</a></h2>
+<p>To respond with consistent data the BEdita object types are transformed
+and formatted using the <code class="docutils literal"><span class="pre">ApiFormatter</span></code> Component that deals with
+cleaning objects from useless data and casting and trasforming some
+fields in correct format.</p>
+<p>If you have a look at <code class="docutils literal"><span class="pre">/objects/:id</span></code> response you&#8217;ll see that fields
+as &#8216;id&#8217; are <strong>integer</strong> other like &#8216;latitude&#8217; and &#8216;longitude&#8217; of geo tag
+are <strong>float</strong> and <strong>dates are formatted in ISO-8601</strong>. <code class="docutils literal"><span class="pre">ApiFormatter</span></code>
+Component with a little help from Models takes care of it.</p>
+<p>When you load an object or list of objects you should always use the
+<code class="docutils literal"><span class="pre">ApiFromatter</span></code> Component to have data always formatted in the same
+way.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// load an object</span>
+<span class="nv">$object</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadObj</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">formatObject</span><span class="p">(</span><span class="nv">$object</span><span class="p">);</span>
+<span class="c1">// in $result[&#39;object&#39;] you have the formatted object</span>
+
+<span class="c1">// list of objects</span>
+<span class="nv">$objects</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadSectionObjects</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;itemsTogether&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">formatObjects</span><span class="p">(</span><span class="nv">$objects</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]);</span>
+<span class="c1">// in $result[&#39;objects&#39;] you have the formatted objects</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">ApiFormatter::formatObject()</span></code> and <code class="docutils literal"><span class="pre">ApiFormatter::formatObjects()</span></code>
+accept as second argument an array of options with which it is possible
+add to the formatted object the count of relations and children.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">formatObject</span><span class="p">(</span><span class="nv">$object</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;countRelations&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;countChildren&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>By default no count is done.</p>
+</div>
+<div class="section" id="help-apiformatter-to-cast-object-fields-in-the-right-way">
+<h2>Help ApiFormatter to cast object fields in the right way<a class="headerlink" href="#help-apiformatter-to-cast-object-fields-in-the-right-way" title="Permalink to this headline">¶</a></h2>
+<p>When formatting BEdita object <code class="docutils literal"><span class="pre">ApiFormatter</span></code> asks help to related
+object type Model to know which fields have to be cast in the right
+type. Basically every object type returns an array of fields that are
+defined in database as &#8216;integer&#8217;, &#8216;float&#8217;, &#8216;date&#8217;, &#8216;datetime&#8217;,
+&#8216;boolean&#8217;. This array is returned from
+<code class="docutils literal"><span class="pre">BEAppObjectModel::apiTransformer()</span></code> method and it is something
+similar to</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;start_date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;end_date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;object_type_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;modified&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;valid&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;user_created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;user_modified&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fixed&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GeoTag&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;object_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;latitude&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;longitude&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;gmaps_lookat&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;latitude&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;longitude&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;zoom&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="p">)</span>
+    <span class="s1">&#39;Tag&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;area_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;object_type_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;area_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;object_type_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>By default only tables that form the object chain plus &#8216;categories&#8217;,
+&#8216;tags&#8217; and &#8216;geo_tags&#8217; are automatically returned, but that method can
+be overridden to customize the result. For example the <code class="docutils literal"><span class="pre">Event</span></code> model
+add to basic transformer the <code class="docutils literal"><span class="pre">DateItem</span></code> transformer:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">apiTransformer</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nv">$transformer</span> <span class="o">=</span> <span class="k">parent</span><span class="o">::</span><span class="na">apiTransformer</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+    <span class="nv">$transformer</span><span class="p">[</span><span class="s1">&#39;DateItem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">DateItem</span><span class="o">-&gt;</span><span class="na">apiTransformer</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$transformer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ApiFormatter</span></code> uses these transformers merged to common object
+transformer <code class="docutils literal"><span class="pre">ApiFormatterComponent::$transformers['object']</span></code> to present
+consistent data to client. It is possible to use some special
+transformer types that are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">underscoreField</span></code> that underscorize a camelcase field maintaining
+value unchanged</li>
+<li><code class="docutils literal"><span class="pre">integerArray</span></code> that cast to integer all array values</li>
+</ul>
+</div>
+<div class="section" id="remove-unwanted-fields">
+<span id="formatting-remove-fields"></span><h2>Remove unwanted fields<a class="headerlink" href="#remove-unwanted-fields" title="Permalink to this headline">¶</a></h2>
+<p>Another useful task of <code class="docutils literal"><span class="pre">ApiFormatter</span></code> is to clean unwanted fields from
+data exposed to client. To do that it uses
+<code class="docutils literal"><span class="pre">ApiFormatter::$objectFieldsToRemove</span></code> array that can be customized
+through configuration or on the fly in controller.</p>
+<div class="section" id="add-fields-to-remove-from-configuration">
+<h3>Add fields to remove from configuration<a class="headerlink" href="#add-fields-to-remove-from-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In <code class="docutils literal"><span class="pre">config/frontend.ini.php</span></code> or <code class="docutils literal"><span class="pre">config/frontend.cfg.php</span></code> is
+possible to customize which fields exposed by default you want to remove
+from results.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;baseUrl&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/api/v1&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;formatting&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// fields that should be added</span>
+            <span class="c1">// to ApiFormattingComponent::objectFieldsToRemove</span>
+            <span class="c1">// i.e. removed from formatted object</span>
+            <span class="s1">&#39;remove&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;GeoTag&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;Tag&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>In this way you say to <code class="docutils literal"><span class="pre">ApiFormatter</span></code> that &#8216;description&#8217;, &#8216;title&#8217;,
+&#8216;name&#8217; of &#8216;Category&#8217;, &#8216;title&#8217; of &#8216;GeoTag&#8217; and all &#8216;Tag&#8217; array must be
+cleaned from final results. Every time <code class="docutils literal"><span class="pre">ApiFormatter::formatObject()</span></code>
+or <code class="docutils literal"><span class="pre">ApiFormatter::formatObjects()</span></code> is called the data are cleaned up
+using <code class="docutils literal"><span class="pre">ApiFormatter::cleanObject()</span></code>.</p>
+</div>
+<div class="section" id="add-fields-to-remove-on-the-fly">
+<h3>Add fields to remove on the fly<a class="headerlink" href="#add-fields-to-remove-on-the-fly" title="Permalink to this headline">¶</a></h3>
+<p>In your <code class="docutils literal"><span class="pre">ApiController</span></code> you can decide in every moment to change which
+fields remove from results using
+<code class="docutils literal"><span class="pre">ApiFormatter::objectFieldsToRemove()</span></code> method.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// get the current value</span>
+<span class="nv">$currentFieldsToRemove</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">objectFieldsToRemove</span><span class="p">();</span>
+
+<span class="c1">// to ovveride all. It completely replaces current fields to remove with new one</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">objectFieldsToRemove</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span>
+    <span class="p">),</span>
+    <span class="k">true</span>
+<span class="p">);</span>
+
+<span class="c1">// to add new fields to remove</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">objectFieldsToRemove</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;remove&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="keep-fields-that-are-removed-by-default">
+<span id="formatting-keep-fields"></span><h2>Keep fields that are removed by default<a class="headerlink" href="#keep-fields-that-are-removed-by-default" title="Permalink to this headline">¶</a></h2>
+<p>Sometime you could want to present to client some fields that normally
+are cleaned up. Likewise to what seen with fields to remove, it is
+possible do it from configuration or on the fly.</p>
+<div class="section" id="add-fields-to-keep-from-configuration">
+<h3>Add fields to keep from configuration<a class="headerlink" href="#add-fields-to-keep-from-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In <code class="docutils literal"><span class="pre">config/frontend.cfg.php</span></code></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;baseUrl&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/api/v1&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;formatting&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// fields that should be removed</span>
+            <span class="c1">// to ApiFormattingComponent::objectFieldsToRemove</span>
+            <span class="c1">// i.e. kept in formatted object</span>
+            <span class="s1">&#39;keep&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;fixed&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;ip_created&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;object_type_id&#39;</span><span class="p">,</span> <span class="s1">&#39;priority&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>In this way you say to <code class="docutils literal"><span class="pre">ApiFormatter</span></code> that &#8216;fixed&#8217;, &#8216;ip_created&#8217; and
+&#8216;object_type_id&#8217;, &#8216;priority&#8217; of &#8216;Category&#8217; must be preserved and
+presented to client.</p>
+</div>
+<div class="section" id="add-fields-to-keep-on-the-fly">
+<h3>Add fields to keep on the fly<a class="headerlink" href="#add-fields-to-keep-on-the-fly" title="Permalink to this headline">¶</a></h3>
+<p>In your <code class="docutils literal"><span class="pre">ApiController</span></code></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// to keep fields</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">objectFieldsToRemove</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;keep&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ip_created&#39;</span><span class="p">,</span> <span class="s1">&#39;fixed&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>It is possible to mix &#8216;remove&#8217; and &#8216;keep&#8217; options both in configuration
+and in controller.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="endpoints/index.html" class="btn btn-neutral float-right" title="API reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="customize_endpoints.html" class="btn btn-neutral" title="Customize endpoints" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

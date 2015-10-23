@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setup a frontend to consume API &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Configuration" href="configuration.html"/>
+        <link rel="prev" title="Welcome to Test RTD’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Setup a frontend to consume API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enable-api-on-new-frontend-app">Enable API on new frontend app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-api-on-old-frontend-app">Enable API on old frontend app</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Auhtentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_endpoints.html">Customize endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formatting_bedita_objects.html">Formatting BEdita objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Setup a frontend to consume API</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/setup.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setup-a-frontend-to-consume-api">
+<h1>Setup a frontend to consume API<a class="headerlink" href="#setup-a-frontend-to-consume-api" title="Permalink to this headline">¶</a></h1>
+<p>To use REST API in your frontend app you need at least BEdita 3.6.0
+version. You can already also test it using 3-corylus branch.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Because of authentication is handled using <a class="reference external" href="http://jwt.io">Json Web Token</a> (<a class="reference external" href="https://tools.ietf.org/html/rfc7519">IETF</a>)
+and the JWT is digital signed using <code class="docutils literal"><span class="pre">'Security.salt'</span></code> you should always remember to change
+it in <code class="docutils literal"><span class="pre">app/config/core.php</span></code> file:</p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Security.salt&#39;</span><span class="p">,</span> <span class="s1">&#39;my-security-random-string&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enable-api-on-new-frontend-app">
+<h2>Enable API on new frontend app<a class="headerlink" href="#enable-api-on-new-frontend-app" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">from shell</p>
+<blockquote>
+<div><div class="highlight-shell"><div class="highlight"><pre><span class="nb">cd</span> /path/to/bedita
+./cake.sh frontend init
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">in <code class="docutils literal"><span class="pre">app/config/frontend.ini.php</span></code> define <code class="docutils literal"><span class="pre">$config['api']['baseUrl']</span></code> with your API base url, for example</p>
+<blockquote>
+<div><div class="highlight-php"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;baseUrl&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/api/v1&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>That&#8217;s all! You are ready to consume the API!</p>
+<p>Point the browser to your API base url and you should see the list of
+endpoints available, for example</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;auth&quot;</span><span class="p">:</span> <span class="s2">&quot;http://example.com/api/v1/auth&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;me&quot;</span><span class="p">:</span> <span class="s2">&quot;http://example.com/api/v1/me&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;objects&quot;</span><span class="p">:</span> <span class="s2">&quot;http://example.com/api/v1/objects&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;poster&quot;</span><span class="p">:</span> <span class="s2">&quot;http://example.com/api/v1/poster&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enable-api-on-old-frontend-app">
+<h2>Enable API on old frontend app<a class="headerlink" href="#enable-api-on-old-frontend-app" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">create a new <code class="docutils literal"><span class="pre">ApiController</span></code> in your frontend</p>
+<blockquote>
+<div><div class="highlight-php"><div class="highlight"><pre><span class="k">require</span><span class="p">(</span><span class="nx">BEDITA_CORE_PATH</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;controllers&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;api_base_controller.php&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ApiController</span> <span class="k">extends</span> <span class="nx">ApiBaseController</span> <span class="p">{</span>
+   <span class="c1">//...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">in <code class="docutils literal"><span class="pre">app/config/frontend.ini.php</span></code> define <code class="docutils literal"><span class="pre">$config['api']['baseUrl']</span></code> with your API base url.</p>
+</li>
+<li><p class="first">edit <code class="docutils literal"><span class="pre">app/config/routes.php</span></code> putting</p>
+<blockquote>
+<div><div class="highlight-php"><div class="highlight"><pre><span class="nv">$apiBaseUrl</span> <span class="o">=</span> <span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;api.baseUrl&#39;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$apiBaseUrl</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">is_string</span><span class="p">(</span><span class="nv">$apiBaseUrl</span><span class="p">))</span> <span class="p">{</span>
+   <span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="nv">$apiBaseUrl</span> <span class="o">.</span> <span class="s1">&#39;/*&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;api&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;route&#39;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>above</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/*&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;route&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>That&#8217;s all!</p>
+<p>After <a class="reference external" href="https://github.com/bedita/bedita/issues/570">#570</a> we have
+implemented a new (and better) way to handle Exceptions. Remember to
+update your frontend <code class="docutils literal"><span class="pre">index.php</span></code> file:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;favicon.ico&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$Dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dispatcher</span><span class="p">();</span>
+    <span class="nv">$Dispatcher</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also make sure you have defined <code class="docutils literal"><span class="pre">views/errors/error.tpl</span></code> in your
+frontend for generic error handling.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Test RTD’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

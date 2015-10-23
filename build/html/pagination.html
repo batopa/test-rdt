@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pagination &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Customize endpoints" href="customize_endpoints.html"/>
+        <link rel="prev" title="Auhtentication" href="authentication.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup a frontend to consume API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Auhtentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Pagination</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#define-your-api-pagination-default-options">Define your API pagination default options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paginate-objects-in-custom-endpoints">Paginate objects in custom endpoints</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customize_endpoints.html">Customize endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formatting_bedita_objects.html">Formatting BEdita objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Pagination</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/pagination.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pagination">
+<h1>Pagination<a class="headerlink" href="#pagination" title="Permalink to this headline">¶</a></h1>
+<p>Requesting a list of objects by <code class="docutils literal"><span class="pre">/objects</span></code> endpoint the result will be
+paginated using default values that you can <a class="reference internal" href="#pagination-customize"><span>customize</span></a> in <code class="docutils literal"><span class="pre">ApiController</span></code>.</p>
+<p>In the response you&#8217;ll see tha pagination data in <code class="docutils literal"><span class="pre">paging</span></code> key</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;paging&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;page&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;page_size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">&quot;page_count&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="mi">995</span><span class="p">,</span>
+        <span class="nt">&quot;total_pages&quot;</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/v1/objects/1/children&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">page</span></code> is the current page</li>
+<li><code class="docutils literal"><span class="pre">page_size</span></code> is the items per page</li>
+<li><code class="docutils literal"><span class="pre">page_count</span></code> is the count of items in current page</li>
+<li><code class="docutils literal"><span class="pre">total</span></code> is the total items</li>
+<li><code class="docutils literal"><span class="pre">total_pages</span></code> is the total numbers of pages</li>
+</ul>
+<p>To request a specific page simply call the endpoint passing <code class="docutils literal"><span class="pre">page</span></code> as
+GET parameter for example <code class="docutils literal"><span class="pre">/api/objects/1/children?page=5</span></code> to request
+the page 5.</p>
+<p>You can also change the page size always through GET parameter, for
+example <code class="docutils literal"><span class="pre">/api/objects/1/children?page_size=50</span></code> to request 50 objects
+per page. <code class="docutils literal"><span class="pre">page_size</span></code> can&#8217;t be greater of <code class="docutils literal"><span class="pre">$paginationOptions['maxPageSize']</span></code> defined in controller.</p>
+<p>See below to know how to change the default values.</p>
+<div class="section" id="define-your-api-pagination-default-options">
+<span id="pagination-customize"></span><h2>Define your API pagination default options<a class="headerlink" href="#define-your-api-pagination-default-options" title="Permalink to this headline">¶</a></h2>
+<p>The default values used paginating items are defined in
+<code class="docutils literal"><span class="pre">ApiBaseController::paginationOptions</span></code> property.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$paginationOptions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;pageSize&#39;</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s1">&#39;maxPageSize&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">pageSize</span></code> is the default items per page and <code class="docutils literal"><span class="pre">maxPageSize</span></code> is
+the max page dimension that client can request. Requests with
+<code class="docutils literal"><span class="pre">page_size</span></code> greater of <code class="docutils literal"><span class="pre">maxPageSize</span></code> returns a 400 HTTP error.</p>
+<p>If you want modify those defaults you can simply override that property
+in <code class="docutils literal"><span class="pre">ApiController</span></code>.</p>
+</div>
+<div class="section" id="paginate-objects-in-custom-endpoints">
+<h2>Paginate objects in custom endpoints<a class="headerlink" href="#paginate-objects-in-custom-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>When a request has <code class="docutils literal"><span class="pre">page</span></code> or <code class="docutils literal"><span class="pre">page_size</span></code> as GET parameters those are
+validated and <code class="docutils literal"><span class="pre">$paginationOptions</span></code> is updated to contain the requested
+page options. A <code class="docutils literal"><span class="pre">dim</span></code> key equal to <code class="docutils literal"><span class="pre">pageSize</span></code> is added to be ready
+to use in some methods as <code class="docutils literal"><span class="pre">FrontendController::loadSectionObjects()</span></code>.</p>
+<p>In this way in a &#8216;custom&#8217; API endpoint you can simply do</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">custom</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadSectionObjects</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginationOptions</span><span class="p">);</span>
+    <span class="c1">// format and set pagination</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setPaging</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiFormatter</span><span class="o">-&gt;</span><span class="na">formatPaging</span><span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;toolbar&#39;</span><span class="p">]));</span>
+
+    <span class="c1">// do other stuff</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and you are sure that pagination will work properly without doing
+anything else.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="customize_endpoints.html" class="btn btn-neutral float-right" title="Customize endpoints" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="authentication.html" class="btn btn-neutral" title="Auhtentication" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

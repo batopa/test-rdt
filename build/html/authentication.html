@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Auhtentication &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Pagination" href="pagination.html"/>
+        <link rel="prev" title="Response and Errors" href="response_and_erroros.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup a frontend to consume API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Auhtentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#key-concepts">Key concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customize-authentication">Customize authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_endpoints.html">Customize endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formatting_bedita_objects.html">Formatting BEdita objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Auhtentication</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/authentication.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auhtentication">
+<h1>Auhtentication<a class="headerlink" href="#auhtentication" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="key-concepts">
+<h2>Key concepts<a class="headerlink" href="#key-concepts" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-access-token">Access token</dt>
+<dd><p class="first">A string granted by the authorization server used to identify the issuer of a request.
+The access token has to be sent to the resource server every time that the client want
+to access to protected resources.</p>
+<p>BEdita REST API uses <a class="reference internal" href="#term-json-web-token"><span class="xref std std-term">JSON Web Token</span></a> as access token.
+It can be sent as <code class="docutils literal"><span class="pre">Authorization</span></code> HTTP header (preferred) using a <code class="docutils literal"><span class="pre">Bearer</span></code> scheme</p>
+<div class="highlight-python"><div class="highlight"><pre>Authorization: Bearer &lt;token&gt;
+</pre></div>
+</div>
+<p class="last">or as query string <code class="docutils literal"><span class="pre">/endpoint?access_token=&lt;token&gt;</span></code></p>
+</dd>
+<dt id="term-json-web-token"><span id="term-jwt"></span>JSON Web Token<br />JWT</dt>
+<dd><p class="first">JSON Web Tokens are an open, industry standard <a class="reference external" href="https://tools.ietf.org/html/rfc7519">RFC 7519</a>
+method for representing claims securely between two parties.</p>
+<p>A JWT is composed by three parts:</p>
+<ul class="simple">
+<li>an <strong>header</strong> containing informations about the token type and algorithm used. It is Base64URL encoded.</li>
+<li>a <strong>payload</strong> containing informations in the form of claims (informations we want to transmit).
+It is Base64URL encoded.</li>
+<li>a <strong>signature</strong> used to verify the authenticity of the JWT using an valid algorithm defined by
+<a class="reference external" href="https://tools.ietf.org/html/rfc7515">JSON Web Signature (JWS)</a>
+specification (for example a shared secret <a class="reference external" href="https://tools.ietf.org/html/rfc7515#page-36">HMAC</a>).</li>
+</ul>
+<p class="last">More info <a class="reference external" href="http://jwt.io">here</a>.</p>
+</dd>
+<dt id="term-refresh-token">Refresh token</dt>
+<dd>An opaque token issued by the authorization server. It is useful to renew an expired <a class="reference internal" href="#term-access-token"><span class="xref std std-term">access token</span></a>
+without send the user credentials again. This token doesn&#8217;t expire but can be revoked by
+<a class="reference internal" href="endpoints/auth.html#delete--auth-(string-refresh_token)" title="DELETE /auth/(string:refresh_token)"><code class="xref http http-delete docutils literal"><span class="pre">DELETE</span> <span class="pre">/auth/(string:refresh_token)</span></code></a></dd>
+</dl>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>The API follow a <strong>token based authentication flow</strong> using a <a class="reference internal" href="#term-json-web-token"><span class="xref std std-term">JSON Web
+Token</span></a> as <a class="reference internal" href="#term-access-token"><span class="xref std std-term">access token</span></a> and an opaque token as <a class="reference internal" href="#term-refresh-token"><span class="xref std std-term">refresh token</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre>+--------+                                     +---------------+
+|        |--(A)- Authorization Request -------&gt;|   Resource    |
+|        |                                     |     Owner     |
+|        |&lt;-(B)-- Authorization Grant ---------|               |
+|        |                                     +---------------+
+|        |
+|        |                                     +---------------+
+|        |--(C)-- Authorization Grant --------&gt;| Authorization |
+| Client |                                     |     Server    |
+|        |&lt;-(D)----- Access Token (JWT) -------|               |
+|        |                and                  |               |
+|        |           Refresh Token             |               |
+|        |                                     +---------------+
+|        |
+|        |                                     +---------------+
+|        |--(E)----- Access Token (JWT) ------&gt;|    Resource   |
+|        |                                     |     Server    |
+|        |&lt;-(F)--- Protected Resource ---------|               |
++--------+                                     +---------------+
+</pre></div>
+</div>
+<p>Usually <a class="reference internal" href="#term-jwt"><span class="xref std std-term">JWT</span></a> payload contains the user <code class="docutils literal"><span class="pre">id</span></code> and some public claims, for example</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;iss&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;iat&quot;</span><span class="p">:</span> <span class="s2">&quot;1441749523&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;exp&quot;</span><span class="p">:</span> <span class="s2">&quot;1441707000&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;15&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>Because of <a class="reference internal" href="#term-jwt"><span class="xref std std-term">JWT</span></a> is digital signed using <code class="docutils literal"><span class="pre">'Security.salt'</span></code> you should
+always remember to change it in <code class="docutils literal"><span class="pre">app/config/core.php</span></code> file:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Security.salt&#39;</span><span class="p">,</span> <span class="s1">&#39;my-security-random-string&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p class="last">It is possible to invalidate all <a class="reference internal" href="#term-access-token"><span class="xref std std-term">access token</span></a> released simply
+changing that value.</p>
+</div>
+<p>By default all <a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3">GET</a> requests don&#8217;t require client and user
+authentication unless the object requested has permission on it. In
+that case the user has to be authenticated before require the resource.
+Other operations as writing/deleting objects (<a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5">POST</a>, <a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.6">PUT</a>, <a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.7">DELETE</a> on
+<code class="docutils literal"><span class="pre">/objects</span></code> endpoint) are always protected instead and they always
+require authentication.</p>
+<p>All the logic to handle authentication is in <code class="docutils literal"><span class="pre">ApiAuth</span></code> component and
+<code class="docutils literal"><span class="pre">ApiBaseController</span></code> use it for you so authentication works out of the
+box. If you need to protect <a class="reference internal" href="customize_endpoints.html#custom-endpoints"><span>custom endpoints</span></a>
+you have to add to custom method</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">customEndPoint</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ApiAuth</span><span class="o">-&gt;</span><span class="na">identify</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">BeditaUnauthorizedException</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customize-authentication">
+<h2>Customize authentication<a class="headerlink" href="#customize-authentication" title="Permalink to this headline">¶</a></h2>
+<p>If you need to customize or change the authentication you can define
+your own auth component. To maintain the component method signature used
+in <code class="docutils literal"><span class="pre">ApiBaseController</span></code> your component should implements the interface
+<code class="docutils literal"><span class="pre">ApiAuthInterface</span></code>.</p>
+<p>Remember that REST API are thought to implement token based
+authentication with the use of both <code class="docutils literal"><span class="pre">access_token</span></code> and
+<code class="docutils literal"><span class="pre">refresh_token</span></code> so the interface define methods to handle these
+tokens. If you need something different probably you would also override
+authenication methods of <code class="docutils literal"><span class="pre">ApiBaseController</span></code>.</p>
+<p>In case you only need some little change it should be better to directly
+extend <code class="docutils literal"><span class="pre">ApiAuth</span></code> component that already implements the interface, and
+override the methods you need.</p>
+<p>For example supposing you want to add additional check to user
+credentials, you can simply override <code class="docutils literal"><span class="pre">ApiAuth::authenticate()</span></code> method
+which deals with it:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">,</span> <span class="s1">&#39;ApiAuth&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">CustomAuthComponent</span> <span class="k">extends</span> <span class="nx">ApiAuthComponent</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">authenticate</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$password</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$authGroupName</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// authentication logic here</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and finally to activate the component all you have to do is define in
+configuration file <code class="docutils literal"><span class="pre">config/frontend.ini.php</span></code> the auth component you
+want to use.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;baseUrl&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/api&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;component&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomAuth&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">ApiController</span></code> you will have access to <code class="docutils literal"><span class="pre">CustomAuth</span></code> instance by
+<code class="docutils literal"><span class="pre">$this-&gt;ApiAuth</span></code> attribute.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pagination.html" class="btn btn-neutral float-right" title="Pagination" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="response_and_erroros.html" class="btn btn-neutral" title="Response and Errors" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Authentication /auth &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="API reference" href="index.html"/>
+        <link rel="next" title="Objects /objects" href="objects.html"/>
+        <link rel="prev" title="API reference" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup a frontend to consume API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Auhtentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize_endpoints.html">Customize endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formatting_bedita_objects.html">Formatting BEdita objects</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Authentication <code class="docutils literal"><span class="pre">/auth</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obtain-an-access-token">Obtain an access token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#renew-the-access-token">Renew the access token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-updated-time-to-access-token-expiration">Get the updated time to access token expiration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#revoking-a-refresh-token">Revoking a <code class="docutils literal"><span class="pre">refresh</span> <span class="pre">token</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects <code class="docutils literal"><span class="pre">/objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="poster.html">Poster <code class="docutils literal"><span class="pre">/poster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="me.html">User profile <code class="docutils literal"><span class="pre">/me</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">API reference</a> &raquo;</li>
+      
+    <li>Authentication <code class="docutils literal"><span class="pre">/auth</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/endpoints/auth.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="authentication-auth">
+<h1>Authentication <code class="docutils literal"><span class="pre">/auth</span></code><a class="headerlink" href="#authentication-auth" title="Permalink to this headline">¶</a></h1>
+<p>It used to retrieve an <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> to access protected items, renew
+<a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> and remove permissions. The <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> is a <a class="reference external" href="http://jwt.io">Json Web Token</a>
+(<a class="reference external" href="https://tools.ietf.org/html/rfc7519">IETF</a>). More info on <a class="reference internal" href="../authentication.html"><em>authentication</em></a></p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>Because of <a class="reference internal" href="../authentication.html#term-jwt"><span class="xref std std-term">JWT</span></a> is digital signed using <code class="docutils literal"><span class="pre">'Security.salt'</span></code> you should
+always remember to change it in <code class="docutils literal"><span class="pre">app/config/core.php</span></code> file:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Security.salt&#39;</span><span class="p">,</span> <span class="s1">&#39;my-security-random-string&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p class="last">It is possible to invalidate all <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> released simply
+changing that value.</p>
+</div>
+<div class="section" id="obtain-an-access-token">
+<h2>Obtain an access token<a class="headerlink" href="#obtain-an-access-token" title="Permalink to this headline">¶</a></h2>
+<dl class="post">
+<dt id="post--auth">
+<code class="descname">POST </code><code class="descname">/auth</code><a class="headerlink" href="#post--auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authenticate an user to obtain an <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request JSON Object:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>username</strong> (<em>string</em>) &#8211; the username</li>
+<li><strong>password</strong> (<em>string</em>) &#8211; the password</li>
+<li><strong>grant_type</strong> (<em>string</em>) &#8211; <cite>&#8220;password&#8221;</cite>, the grant type to apply (password is the default, it can be ommitted)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; response contains <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> and <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; when required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; when authentication fails</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/auth</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;grant_type&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;auth&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJ0eXAi.....&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;expires_in&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+        <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;51a3f718e7abc712e421f64ea497a323aea4e76f&quot;</span>
+        <span class="p">},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/auth&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Once you received the access token you have to use it in every request
+that requires authentication. It can be used in HTTP header</p>
+<div class="highlight-python"><div class="highlight"><pre>Authorization: Bearer &lt;token&gt;
+</pre></div>
+</div>
+<p class="last">or as query string <code class="docutils literal"><span class="pre">/api/endpoint?access_token=&lt;token&gt;</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="renew-the-access-token">
+<h2>Renew the access token<a class="headerlink" href="#renew-the-access-token" title="Permalink to this headline">¶</a></h2>
+<p>If the access token was expired you need to generate a new one started
+by refresh token. <strong>In this case do not pass the expired access token</strong></p>
+<dl class="post">
+<dt id="post--auth">
+<code class="descname">POST </code><code class="descname">/auth</code><a class="headerlink" href="#post--auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renew an <cite>access_token</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request JSON Object:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>refresh_token</strong> (<em>string</em>) &#8211; the <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a> to use to renew <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+<li><strong>grant_type</strong> (<em>string</em>) &#8211; <cite>&#8220;refresh_token&#8221;</cite>, the grant type to apply</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success, it responds with the new <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> and <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; when required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; when <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a> is invalid</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/auth</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;grant_type&quot;</span><span class="p">:</span> <span class="s2">&quot;refresh_token&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;51a3f718e7abc712e421f64ea497a323aea4e76f&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;auth&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;rftJasd3.....&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;expires_in&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+        <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;51a3f718e7abc712e421f64ea497a323aea4e76f&quot;</span>
+        <span class="p">},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/auth&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="get-the-updated-time-to-access-token-expiration">
+<h2>Get the updated time to access token expiration<a class="headerlink" href="#get-the-updated-time-to-access-token-expiration" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--auth">
+<code class="descname">GET </code><code class="descname">/auth</code><a class="headerlink" href="#get--auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns the updated <code class="docutils literal"><span class="pre">expires_in</span></code> time for <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; the <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> as Bearer token</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; no error, payload contains the updated <code class="docutils literal"><span class="pre">expires_in</span></code> value</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; the <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> is invalid</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/auth</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;auth&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;rftJasd3.....&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;expires_in&quot;</span><span class="p">:</span> <span class="mi">48</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/auth&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="revoking-a-refresh-token">
+<h2>Revoking a <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a><a class="headerlink" href="#revoking-a-refresh-token" title="Permalink to this headline">¶</a></h2>
+<p>In order to invalidate an <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> you need to remove it from client and revoke the <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a></p>
+<dl class="delete">
+<dt id="delete--auth-(string-refresh_token)">
+<code class="descname">DELETE </code><code class="descname">/auth/</code><span class="sig-paren">(</span><em class="property">string: </em><em>refresh_token</em><span class="sig-paren">)</span><a class="headerlink" href="#delete--auth-(string-refresh_token)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revoke a <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; the <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> as Bearer token</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>refresh_token</strong> (<em>string</em>) &#8211; the <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a> to revoke</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">204 No Content</a> &#8211; the refresh token was deleted</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; the <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a> is invalid or</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; the <a class="reference internal" href="../authentication.html#term-refresh-token"><span class="xref std std-term">refresh token</span></a> was already revoked or not exists</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="objects.html" class="btn btn-neutral float-right" title="Objects /objects" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="API reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

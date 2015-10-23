@@ -1,0 +1,1767 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Objects /objects &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="API reference" href="index.html"/>
+        <link rel="next" title="Poster /poster" href="poster.html"/>
+        <link rel="prev" title="Authentication /auth" href="auth.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Setup a frontend to consume API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Auhtentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize_endpoints.html">Customize endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../formatting_bedita_objects.html">Formatting BEdita objects</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auth.html">Authentication <code class="docutils literal"><span class="pre">/auth</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Objects <code class="docutils literal"><span class="pre">/objects</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-an-object">Get an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-collection-of-objects">Get a collection of objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-publication-s-descendants">Get publication&#8217;s descendants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-object-s-children">Get object&#8217;s children</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-object-s-children-of-type-section">Get object&#8217;s children of type <em>section</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-object-s-children-of-type-contents">Get object&#8217;s children of type <em>contents</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-object-s-descendants">Get object&#8217;s descendants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-object-s-siblings">Get object&#8217;s siblings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-relations-count">Get relations count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-the-related-objects-detail">Get the related objects detail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-the-relation-detail-between-objects">Get the relation detail between objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-the-child-position">Get the child position</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#create-an-object">Create an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-an-object">Update an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-or-update-relations-between-objects">Create or update relations between objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replace-relation-data-between-objects">Replace relation data between objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-or-edit-children">Add or edit children</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-child-position">Update child position</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-an-object">Delete an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-a-relation-between-objects">Delete a relation between objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remove-a-child-from-a-parent">Remove a child from a parent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="poster.html">Poster <code class="docutils literal"><span class="pre">/poster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="me.html">User profile <code class="docutils literal"><span class="pre">/me</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">API reference</a> &raquo;</li>
+      
+    <li>Objects <code class="docutils literal"><span class="pre">/objects</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/endpoints/objects.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="objects-objects">
+<h1>Objects <code class="docutils literal"><span class="pre">/objects</span></code><a class="headerlink" href="#objects-objects" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="get-an-object">
+<h2>Get an object<a class="headerlink" href="#get-an-object" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--objects-(object_id)">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--objects-(object_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an object detail.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that the response data fields can change depending of
+BEdita object type exposed and configuration.</p>
+</div>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/objects/15</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;object&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-01-08T00:00:00+0100&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;end_date&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nt">&quot;subject&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nt">&quot;abstract&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nt">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the body text&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;object_type_id&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+            <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-01-30T10:04:49+0100&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-05-08T12:59:49+0200&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;hello world&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;nickname&quot;</span><span class="p">:</span> <span class="s2">&quot;hello-world&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;the description&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;valid&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;lang&quot;</span><span class="p">:</span> <span class="s2">&quot;eng&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;rights&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;creator&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;publisher&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;note&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nt">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;publication_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-01-08T00:00:00+0100&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;languages&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;ita&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;ciao mondo&quot;</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;relations&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;attach&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/15/relation/attach&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;seealso&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/15/relation/seealso&quot;</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;object_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Document&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;authorized&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;free_access&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;custom_properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;bookpagenumber&quot;</span><span class="p">:</span> <span class="s2">&quot;12&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;number&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;geo_tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">68799</span><span class="p">,</span>
+                    <span class="nt">&quot;object_id&quot;</span><span class="p">:</span> <span class="mi">218932</span><span class="p">,</span>
+                    <span class="nt">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">44.4948179</span><span class="p">,</span>
+                    <span class="nt">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">11.33969</span><span class="p">,</span>
+                    <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;via Rismondo 2, Bologna&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;gmaps_lookats&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;zoom&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+                        <span class="nt">&quot;mapType&quot;</span><span class="p">:</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">44.4948179</span><span class="p">,</span>
+                        <span class="nt">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">11.33969</span><span class="p">,</span>
+                        <span class="nt">&quot;range&quot;</span><span class="p">:</span> <span class="mf">44052.931589613</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;tag one&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;tag-one&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;tag two&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;tag-two&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">266</span><span class="p">,</span>
+                    <span class="nt">&quot;area_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                    <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;category one&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;category-one&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">323</span><span class="p">,</span>
+                    <span class="nt">&quot;area_id&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                    <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;category two&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;category-two&quot;</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/15&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Every object can have relations with other objects. The count of objects
+related is in <code class="docutils literal"><span class="pre">data.object.relations.&lt;relation_name&gt;</span></code> where there are
+<code class="docutils literal"><span class="pre">count</span></code> (the number of related objects) and <code class="docutils literal"><span class="pre">url</span></code> fields. The <code class="docutils literal"><span class="pre">url</span></code>
+is the complete API request url to get the object related, for example
+<a class="reference external" href="https://example.com/api/objects/15/relations/attach">https://example.com/api/objects/15/relations/attach</a></p>
+</div>
+<p>If <em>object_id</em> corresponds to a <strong>section</strong> or a <strong>publication</strong> then the
+response will contain <code class="docutils literal"><span class="pre">data.object.children</span></code> with the total count of
+children, count of contents, count of sections and the related url.</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/children&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;contents&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/contents&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;sections&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/sections&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="get-a-collection-of-objects">
+<h2>Get a collection of objects<a class="headerlink" href="#get-a-collection-of-objects" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">/objects</span></code> endpoint can be used to retrieve a collection of objects.</p>
+<div class="section" id="get-publication-s-descendants">
+<h3>Get publication&#8217;s descendants<a class="headerlink" href="#get-publication-s-descendants" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects">
+<code class="descname">GET </code><code class="descname">/objects</code><a class="headerlink" href="#get--objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a paginated list of objects that are descendants of the
+related publication configured in <code class="docutils literal"><span class="pre">app/config/frontend.ini.php</span></code>.
+The response will be an array of objects as shown below.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The request is not authorized to access to protected publication</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permissions to access to protected publication</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/objects</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<p>For readability the fields of objects are limited to &#8220;title&#8221; but they are similar to <a class="reference internal" href="#get--objects-(object_id)" title="GET /objects/(object_id)"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)</span></code></a> example</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;objects&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;title one&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;title two&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;title three&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;title four&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;title five&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;paging&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;page&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;page_size&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="nt">&quot;page_count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="nt">&quot;total_pages&quot;</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/children&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="get-object-s-children">
+<span id="get-a-list-of-children"></span><h3>Get object&#8217;s children<a class="headerlink" href="#get-object-s-children" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-children">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/children</code><a class="headerlink" href="#get--objects-(object_id)-children" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the paginated children of object <em>object_id</em>.
+The object has to be a section or the publication.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="get-object-s-children-of-type-section">
+<h3>Get object&#8217;s children of type <em>section</em><a class="headerlink" href="#get-object-s-children-of-type-section" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-sections">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/sections</code><a class="headerlink" href="#get--objects-(object_id)-sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the paginated children of object <em>object_id</em>.
+The object has to be a section or the publication.
+The children are just sections (<em>section BEdita object type</em>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="get-object-s-children-of-type-contents">
+<h3>Get object&#8217;s children of type <em>contents</em><a class="headerlink" href="#get-object-s-children-of-type-contents" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-contents">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/contents</code><a class="headerlink" href="#get--objects-(object_id)-contents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the paginated children of object <em>object_id</em>.
+The object has to be a section or the publication.
+The children are other than sections.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="get-object-s-descendants">
+<h3>Get object&#8217;s descendants<a class="headerlink" href="#get-object-s-descendants" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-descendants">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/descendants</code><a class="headerlink" href="#get--objects-(object_id)-descendants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the paginated children of object <em>object_id</em>.
+The object has to be a section or the publication.
+The children are other than sections.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="get-object-s-siblings">
+<h3>Get object&#8217;s siblings<a class="headerlink" href="#get-object-s-siblings" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-siblings">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/siblings</code><a class="headerlink" href="#get--objects-(object_id)-siblings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the paginated siblings of object <em>object_id</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="get-relations-count">
+<span id="id1"></span><h3>Get relations count<a class="headerlink" href="#get-relations-count" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-relations">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/relations</code><a class="headerlink" href="#get--objects-(object_id)-relations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a summary of relations information about object <em>object_id</em>.
+It shows every relation with the <strong>count</strong> and the <strong>url</strong> to get the related objects detail.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/objects/15/relations</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;attach&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/relations/attach&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;seealso&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/relations/seealso&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/relations&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="get-the-related-objects-detail">
+<span id="get-relations-objects-detail"></span><h3>Get the related objects detail<a class="headerlink" href="#get-the-related-objects-detail" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-relations-(string-relation_name)">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/relations/</code><span class="sig-paren">(</span><em class="property">string: </em><em>relation_name</em><span class="sig-paren">)</span><a class="headerlink" href="#get--objects-(object_id)-relations-(string-relation_name)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the paginated collection of objects related by <em>relation_name</em> to object <em>object_id</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="get-the-relation-detail-between-objects">
+<span id="get-the-relation-detail"></span><h3>Get the relation detail between objects<a class="headerlink" href="#get-the-relation-detail-between-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-relations-(string-relation_name)-(int-related_id)">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/relations/</code><span class="sig-paren">(</span><em class="property">string: </em><em>relation_name</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em class="property">int: </em><em>related_id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--objects-(object_id)-relations-(string-relation_name)-(int-related_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the relation detail between object <em>object_id</em> and <em>related_id</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+<li><strong>relation_name</strong> (<em>string</em>) &#8211; the name of the relation that ties <em>object_id</em> and <em>related_id</em></li>
+<li><strong>related_id</strong> (<em>int</em>) &#8211; the object id of the related object</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/objects/15/relations/attach/23</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;here the label&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/relations/attach/2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="get-the-child-position">
+<h3>Get the child position<a class="headerlink" href="#get-the-child-position" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--objects-(object_id)-children-(int-child_id)">
+<code class="descname">GET </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/children/</code><span class="sig-paren">(</span><em class="property">int: </em><em>child_id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--objects-(object_id)-children-(int-child_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the position (<code class="docutils literal"><span class="pre">priority</span></code> key) of <em>child_id</em> relative to
+all children of parent object <em>object_id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; optional <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object_id</strong> (<em>int|string</em>) &#8211; identify a BEdita object. It can be the object id or the object unique name (nickname)</li>
+<li><strong>child_id</strong> (<em>int</em>) &#8211; the object id of the child of object <em>object_id</em></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Malformed request</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; The object <em>object_id</em> is protected and the request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> &#8211; The request is authorized but without sufficient permission to access object <em>object_id</em></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; Object <em>object_id</em> not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/objects/1/children/2</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/children/2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="create-an-object">
+<span id="create-object"></span><h2>Create an object<a class="headerlink" href="#create-an-object" title="Permalink to this headline">¶</a></h2>
+<dl class="post">
+<dt id="post--objects">
+<code class="descname">POST </code><code class="descname">/objects</code><a class="headerlink" href="#post--objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new BEdita object type.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>To write an object it has to be <a class="reference internal" href="../configuration.html"><em>configured to be writable</em></a></p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="c1">// ....</span>
+    <span class="s1">&#39;validation&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// to save &#39;document&#39; and &#39;event&#39; object types</span>
+        <span class="s1">&#39;writableObjects&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;event&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>The request body has to be a JSON as</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where inside <code class="docutils literal"><span class="pre">&quot;data&quot;</span></code> are placed all fields to save.
+User has to be <a class="reference internal" href="auth.html"><em>authenticated</em></a>
+and <code class="docutils literal"><span class="pre">&quot;data&quot;:</span> <span class="pre">{}</span></code> must contain: <code class="docutils literal"><span class="pre">object_type</span></code> i.e. the
+object type you want to create at least a parent (<code class="docutils literal"><span class="pre">parents</span></code> key)
+accessible (with right permission for user authorized) on publication
+tree or at least a relation (<code class="docutils literal"><span class="pre">relations</span></code> key) with another object
+reachable (where <em>reachable</em> means an accessible object on tree or
+related to an accessible object on tree).</p>
+<p>Required keys in JSON are shown below.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Request JSON Object:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>data.object_type</strong> (<em>string</em>) &#8211; (<strong>required</strong>) the object type to create</li>
+<li><strong>data.parents</strong> (<em>array</em>) &#8211; (<strong>required</strong> if <code class="docutils literal"><span class="pre">data.relations</span></code> with conditions specified below missing) a list of parents.
+Parents must be accessible (with right permission for user authorized) on publication
+tree</li>
+<li><strong>data.relations</strong> (<em>object</em>) &#8211; <p>(<strong>required</strong> if <code class="docutils literal"><span class="pre">data.parents</span></code> with conditions specified above missing)
+an object of relations where the keys are the relations&#8217; names. Every relation contains an array of objects of <code class="docutils literal"><span class="pre">related_id</span></code>
+and optionally of relation params</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;name1&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;name_param_one&quot;</span><span class="p">:</span> <span class="s2">&quot;value param one&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;name_param_two&quot;</span><span class="p">:</span> <span class="s2">&quot;value param two&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;name2&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">3</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3">Location</a> &#8211; The url to the resource just created <code class="docutils literal"><span class="pre">https://example.com/objects/(object_id)</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> &#8211; Success, the object was created. Return the object detail as in <a class="reference internal" href="#get--objects-(object_id)" title="GET /objects/(object_id)"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)</span></code></a></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/objects</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My title&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;object_type&quot;</span><span class="p">:</span> <span class="s2">&quot;event&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;bla bla bla&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;parents&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
+        <span class="nt">&quot;relations&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;attach&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;foobar&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">23</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;seealso&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">167</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name-category-one&quot;</span><span class="p">,</span> <span class="s2">&quot;name-category-two&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name-tag_one&quot;</span><span class="p">,</span> <span class="s2">&quot;name-tag-two&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;geo_tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;geo tag title&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;via ....&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">43.012</span><span class="p">,</span>
+                <span class="nt">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">10.45</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;date_items&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-08T15:00:35+0200&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;end_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-07-08T15:00:35+0200&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;days&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-09-01T15:00:35+0200&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;end_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-09-30T15:00:35+0200&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My title&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;object_type&quot;</span><span class="p">:</span> <span class="s2">&quot;event&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;bla bla bla&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response payload contains the created object detail. <em>In the example above only some fileds are shown</em>.</p>
+<p>dates must be in ISO 8601 format.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="update-an-object">
+<h2>Update an object<a class="headerlink" href="#update-an-object" title="Permalink to this headline">¶</a></h2>
+<dl class="post">
+<dt id="post--objects">
+<code class="descname">POST </code><code class="descname">/objects</code><a class="headerlink" href="#post--objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update an existent object.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>To write an object it has to be <a class="reference internal" href="../configuration.html"><em>configured to be writable</em></a></p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="c1">// ....</span>
+    <span class="s1">&#39;validation&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// to save &#39;document&#39; and &#39;event&#39; object types</span>
+        <span class="s1">&#39;writableObjects&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;event&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5">POST</a> request can be also used to <strong>update an existent object</strong>. In that case the
+object <code class="docutils literal"><span class="pre">id</span></code> has to be passed in <code class="docutils literal"><span class="pre">&quot;data&quot;</span></code> (as <a class="reference internal" href="#create-object"><span>creating object</span></a>) and <code class="docutils literal"><span class="pre">object_type</span></code> can be omitted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Request JSON Object:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>data.id</strong> (<em>string</em>) &#8211; (<strong>required</strong>) the id of the object to update</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success, the object was updated. Return the object detail as in <a class="reference internal" href="#get--objects-(object_id)" title="GET /objects/(object_id)"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)</span></code></a></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="create-or-update-relations-between-objects">
+<h2>Create or update relations between objects<a class="headerlink" href="#create-or-update-relations-between-objects" title="Permalink to this headline">¶</a></h2>
+<dl class="post">
+<dt id="post--objects-(object_id)-relations-(string-relation_name)">
+<code class="descname">POST </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/relations/</code><span class="sig-paren">(</span><em class="property">string: </em><em>relation_name</em><span class="sig-paren">)</span><a class="headerlink" href="#post--objects-(object_id)-relations-(string-relation_name)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create relations <em>relation_name</em> between <em>object_id</em> and other objects.
+If the relation between objects already exists then it will be updated.</p>
+<p>Request data must be an array of relation data or only a
+relation data if you need to save only one relation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Request JSON Array of Objects:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>related_id</strong> (<em>string</em>) &#8211; (<strong>required</strong>) the related object id</li>
+<li><strong>params</strong> (<em>string</em>) &#8211; (<strong>optional</strong>) it depends from relation type</li>
+<li><strong>priority</strong> (<em>string</em>) &#8211; (<strong>optional</strong>) is the position of the relation.
+Relation with lower priority are shown before.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3">Location</a> &#8211; If at least a new relation was created (<a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a>).
+The url to <a class="reference internal" href="#get-relations-objects-detail"><span>collection of related objects</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success but no new relation was created.</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> &#8211; Success and at least a new relation was created.
+Return the object detail as in <a class="reference internal" href="#get--objects-(object_id)" title="GET /objects/(object_id)"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)</span></code></a></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request to create/update only one relation</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/objects/3/relations/attach</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">34</span><span class="p">,</span>
+        <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example request to create/update a bunch of relations</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/objects/3/relations/attach</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;my label&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;related_id&quot;</span><span class="p">:</span> <span class="mi">28</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://example.com/objects/3/relations/attach</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p>The response body will be the same as <a class="reference internal" href="#get--objects-(object_id)-relations-(string-relation_name)" title="GET /objects/(object_id)/relations/(string:relation_name)"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)/relations/(string:relation_name)</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="replace-relation-data-between-objects">
+<h2>Replace relation data between objects<a class="headerlink" href="#replace-relation-data-between-objects" title="Permalink to this headline">¶</a></h2>
+<dl class="put">
+<dt id="put--objects-(object_id)-relations-(string-relation_name)-(int-related_id)">
+<code class="descname">PUT </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/relations/</code><span class="sig-paren">(</span><em class="property">string: </em><em>relation_name</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em class="property">int: </em><em>related_id</em><span class="sig-paren">)</span><a class="headerlink" href="#put--objects-(object_id)-relations-(string-relation_name)-(int-related_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace the relation <em>relation_name</em> data between <em>object_id</em> and <em>related_id</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Request JSON Object:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>related_id</strong> (<em>string</em>) &#8211; (<strong>required</strong>) the related object id</li>
+<li><strong>params</strong> (<em>string</em>) &#8211; (<strong>optional</strong>) it depends from relation type</li>
+<li><strong>priority</strong> (<em>string</em>) &#8211; (<strong>optional</strong>) is the position of the relation.
+Relation with lower priority are shown before.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>At least <code class="docutils literal"><span class="pre">params</span></code> or <code class="docutils literal"><span class="pre">priority</span></code> must be defined. If one of these is not passed it will be set to <code class="docutils literal"><span class="pre">null</span></code>.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">PUT</span> <span class="nn">/objects/1/relations/attach/2</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;new label&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">Success</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p>The response body will be the same as <a class="reference internal" href="#get--objects-(object_id)-relations-(string-relation_name)-(int-related_id)" title="GET /objects/(object_id)/relations/(string:relation_name)/(int:related_id)"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)/relations/(string:relation_name)/(int:related_id)</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="add-or-edit-children">
+<h2>Add or edit children<a class="headerlink" href="#add-or-edit-children" title="Permalink to this headline">¶</a></h2>
+<dl class="post">
+<dt id="post--objects-(object_id)-children">
+<code class="descname">POST </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/children</code><a class="headerlink" href="#post--objects-(object_id)-children" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add or edit children to area/section object type  identified by <em>object_id</em></p>
+<p>Request data must be an array of child data or only a
+child data if you need to save only one child.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Request JSON Array of Objects:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>child_id</strong> (<em>string</em>) &#8211; (<strong>required</strong>) the child object id</li>
+<li><strong>priority</strong> (<em>string</em>) &#8211; (<strong>optional</strong>) is the position of the child on the tree.
+Relation with lower priority are shown before.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3">Location</a> &#8211; If at least a new child was created (<a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a>)
+it contains the url to <a class="reference internal" href="#get-a-list-of-children"><span>collection of children objects</span></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success but all objects already were children of <em>object_id</em>.
+The children position (<code class="docutils literal"><span class="pre">priority</span></code>) could be changed.
+Response body is the children detail <a class="reference internal" href="#get--objects-(object_id)-children" title="GET /objects/(object_id)/children"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)/children</span></code></a></li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> &#8211; Success and at least a new child was added to parent <em>object_id</em>.
+Response body is the children detail <a class="reference internal" href="#get--objects-(object_id)-children" title="GET /objects/(object_id)/children"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)/children</span></code></a>.</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request to add/edit many children</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/objects/3/children</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;child_id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">3</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;child_id&quot;</span><span class="p">:</span> <span class="mi">28</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example request to add/edit one child</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/objects/3/children</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;child_id&quot;</span><span class="p">:</span> <span class="mi">34</span><span class="p">,</span>
+        <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response body will be the same as <a class="reference internal" href="#get--objects-(object_id)-children" title="GET /objects/(object_id)/children"><code class="xref http http-get docutils literal"><span class="pre">GET</span> <span class="pre">/objects/(object_id)/children</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="update-child-position">
+<h2>Update child position<a class="headerlink" href="#update-child-position" title="Permalink to this headline">¶</a></h2>
+<dl class="put">
+<dt id="put--objects-(object_id)-children-(int-child_id)">
+<code class="descname">PUT </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/children/</code><span class="sig-paren">(</span><em class="property">int: </em><em>child_id</em><span class="sig-paren">)</span><a class="headerlink" href="#put--objects-(object_id)-children-(int-child_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the child position inside the children of <em>object_id</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Request JSON Object:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>priority</strong> (<em>string</em>) &#8211; (<strong>required</strong>) the position of child object id</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> &#8211; Success. Children position (<code class="docutils literal"><span class="pre">priority</span></code>) updated.</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">POST</span> <span class="nn">/objects/1/children/2</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">5</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">5</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/objects/1/children/2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="delete-an-object">
+<h2>Delete an object<a class="headerlink" href="#delete-an-object" title="Permalink to this headline">¶</a></h2>
+<dl class="delete">
+<dt id="delete--objects-(object_id)">
+<code class="descname">DELETE </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><a class="headerlink" href="#delete--objects-(object_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the object <em>object_id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">204 No Content</a> &#8211; The object was deleted.</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; The object to delete not exists or it has already been removed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">DELETE</span> <span class="nn">/objects/15</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="delete-a-relation-between-objects">
+<h2>Delete a relation between objects<a class="headerlink" href="#delete-a-relation-between-objects" title="Permalink to this headline">¶</a></h2>
+<dl class="delete">
+<dt id="delete--objects-(object_id)-relations-(string-relation_name)-(int-related_id)">
+<code class="descname">DELETE </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/relations/</code><span class="sig-paren">(</span><em class="property">string: </em><em>relation_name</em><span class="sig-paren">)</span><code class="descname">/</code><span class="sig-paren">(</span><em class="property">int: </em><em>related_id</em><span class="sig-paren">)</span><a class="headerlink" href="#delete--objects-(object_id)-relations-(string-relation_name)-(int-related_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the relation <em>relation_name</em> between <em>object_id</em> and <em>related_id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">204 No Content</a> &#8211; The relation <em>relation_name</em> between <em>object_id</em> and <em>related_id</em> was deleted.</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; The relation <em>relation_name</em> between <em>object_id</em> and <em>related_id</em>
+not exists or it has already been removed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">DELETE</span> <span class="nn">/objects/10/relations/seealso/36</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="remove-a-child-from-a-parent">
+<h2>Remove a child from a parent<a class="headerlink" href="#remove-a-child-from-a-parent" title="Permalink to this headline">¶</a></h2>
+<dl class="delete">
+<dt id="delete--objects-(object_id)-children-(int-child_id)">
+<code class="descname">DELETE </code><code class="descname">/objects/</code><span class="sig-paren">(</span><em>object_id</em><span class="sig-paren">)</span><code class="descname">/children/</code><span class="sig-paren">(</span><em class="property">int: </em><em>child_id</em><span class="sig-paren">)</span><a class="headerlink" href="#delete--objects-(object_id)-children-(int-child_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove <em>child_id</em> from <em>object_id</em> children</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Request Headers:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8">Authorization</a> &#8211; (<strong>required</strong>) <a class="reference internal" href="../authentication.html#term-access-token"><span class="xref std std-term">access token</span></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Response Headers:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a> &#8211; application/json</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">204 No Content</a> &#8211; <em>child_id</em> was removed from <em>object_id</em> children.</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> &#8211; Required parameters are missing or the request is malformed</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> &#8211; Request is not authorized</li>
+<li><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> &#8211; <em>child_id</em> not exists or it has already been removed from <em>object_id</em> children.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="nf">DELETE</span> <span class="nn">/objects/1/children/3</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json, text/javascript</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http"><div class="highlight"><pre><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poster.html" class="btn btn-neutral float-right" title="Poster /poster" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auth.html" class="btn btn-neutral" title="Authentication /auth" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

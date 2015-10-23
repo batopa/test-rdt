@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Customize endpoints &mdash; Test RTD 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/api_methods.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Test RTD 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Formatting BEdita objects" href="formatting_bedita_objects.html"/>
+        <link rel="prev" title="Pagination" href="pagination.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Test RTD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup a frontend to consume API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response_and_erroros.html">Response and Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Auhtentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Customize endpoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#custom-endpoints">Custom endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#blacklist-endpoints">Blacklist endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-special-object-types-endpoints">Enable special object types endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customize-objects-endpoint-with-your-own-url-path-filter-types">Customize <code class="docutils literal"><span class="pre">/objects</span></code> endpoint with your own URL path filter types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="formatting_bedita_objects.html">Formatting BEdita objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/index.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown page</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Test RTD</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Customize endpoints</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/customize_endpoints.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="customize-endpoints">
+<h1>Customize endpoints<a class="headerlink" href="#customize-endpoints" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="custom-endpoints">
+<span id="id1"></span><h2>Custom endpoints<a class="headerlink" href="#custom-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>Once you have <a class="reference internal" href="setup.html"><em>enabled a frontend to consume API</em></a>
+you have a set of <a class="reference internal" href="endpoints/index.html"><em>default available endpoints</em></a>
+visible pointing the browser to your API base url.</p>
+<p>Sometimes you would want to define other endpoints to serve your custom
+data to clients. You can do it simply override the <code class="docutils literal"><span class="pre">$endpoints</span></code>
+attribute of <code class="docutils literal"><span class="pre">ApiBaseController</span></code>.</p>
+<p>Write in your <code class="docutils literal"><span class="pre">ApiController</span></code></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$endPoints</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;friends&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and define the related custom method that will handle the data to show</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">friends</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$friendsList</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;Jerry&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span><span class="nv">$friendsList</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setData()</span></code> method takes care of put <code class="docutils literal"><span class="pre">$friendsList</span></code> array inside
+response <code class="docutils literal"><span class="pre">data</span></code> key. Point the browser to your API base url you should
+see &#8216;friends&#8217; in the endpoints list and if you request
+<code class="docutils literal"><span class="pre">GET</span> <span class="pre">/api/base/url/friends</span></code> you should see</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;friends&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Tom&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Jerry&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/api/v1/friends&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this way all request types (GET, POST, PUT, DELETE) have to be
+handled by <code class="docutils literal"><span class="pre">friends()</span></code> method. Another possibility is to create one
+method for every request type allowed from the endpoint. It can be done
+creating methods named <em>&#8220;request type + endpoint camelized&#8221;</em>.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">getFriends</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">postFriends</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">putFriends</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">deleteFriends</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="blacklist-endpoints">
+<h2>Blacklist endpoints<a class="headerlink" href="#blacklist-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>In some situations you will not want to expose some or all default
+endpoints, so in order to disable them it is possible to define a
+blacklist. After that calling those endpoints the response will be a
+<strong>405 Method Not Allowed</strong> HTTP error status code.</p>
+<p>For example to blacklist &#8220;auth&#8221; and &#8220;objects&#8221; endpoints, in your
+<code class="docutils literal"><span class="pre">ApiController</span></code> override <code class="docutils literal"><span class="pre">$blacklistEndPoints</span></code> writing</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$blacklistEndPoints</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="s1">&#39;objects&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now, pointing to API base url you shouldn&#8217;t see &#8220;auth&#8221; and &#8220;objects&#8221; endpoints anymore.</p>
+<p>Pointing to them directly and you will receive a <strong>405 HTTP error</strong>.</p>
+</div>
+<div class="section" id="enable-special-object-types-endpoints">
+<h2>Enable special object types endpoints<a class="headerlink" href="#enable-special-object-types-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>If you need you can also enable some special endpoint disabled by
+default. Those endpoints refer to BEdita object types mapping them to
+their pluralize form. So if you want to enable <code class="docutils literal"><span class="pre">/documents</span></code> end
+<code class="docutils literal"><span class="pre">/galleries</span></code> endpoints you have to edit <code class="docutils literal"><span class="pre">ApiController</span></code></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$whitelistObjectTypes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;gallery&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>These special endpoints automatically filter response objects through
+the object type related.</p>
+<p>Again go to API base url to see &#8216;documents&#8217; and &#8216;galleries&#8217; added to
+endpoints list.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that those special endpoints work only for GET requests.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customize-objects-endpoint-with-your-own-url-path-filter-types">
+<h2>Customize <code class="docutils literal"><span class="pre">/objects</span></code> endpoint with your own URL path filter types<a class="headerlink" href="#customize-objects-endpoint-with-your-own-url-path-filter-types" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">objects</span></code> endpoint can be customized with URL path filters building
+endpoint structured as <code class="docutils literal"><span class="pre">/objects/:id/url_path_filter</span></code>. URL path
+filters on by default are visible in <code class="docutils literal"><span class="pre">ApiBaseController::$allowedObjectsUrlPath</span></code> property</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$allowedObjectsUrlPath</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;get&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;relations&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;contents&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sections&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;descendants&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;siblings&#39;</span><span class="p">,</span>
+            <span class="c1">//&#39;ancestors&#39;,</span>
+            <span class="c1">//&#39;parents&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;relations&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;put&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;relations&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;delete&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;relations&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>URL path filters can be inhibited or new ones can be added overriding
+that property in <code class="docutils literal"><span class="pre">ApiController</span></code>.</p>
+<p>In practice URL path filters are divided by request type (GET, POST,
+...) so it is possible doing request like <code class="docutils literal"><span class="pre">GET</span> <span class="pre">/objects/1/children</span></code>,
+<code class="docutils literal"><span class="pre">POST</span> <span class="pre">/objects/1/relations</span></code> but not <code class="docutils literal"><span class="pre">POST</span> <span class="pre">/objects/1/siblings</span></code>
+because of that filter is active only for GET requests.</p>
+<p>Every URL path filter must have a corresponding controller method named
+<em>&#8220;request type + Objects + URL path filter camelized&#8221;</em> that will handle
+the request. First url part <em>:id</em> and every other url parts after URL
+path filter will be passed to that method as arguments.</p>
+<p>For example, supposing to want to remove all &#8216;delete&#8217; and &#8216;post&#8217; URL
+path filters and add a new &#8216;foo_bar&#8217; filter for GET request, in
+<code class="docutils literal"><span class="pre">ApiController</span></code> we can override</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$allowedObjectsUrlPath</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;get&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;relations&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;contents&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sections&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;descendants&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;siblings&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foo_bar&#39;</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>and add the method</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">getObjectsFooBar</span><span class="p">(</span><span class="nv">$objectId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle request here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this way the new URL path filter is active and reachable from
+<code class="docutils literal"><span class="pre">GET</span> <span class="pre">/objects/:id/foo_bar</span></code>. Every other request type (POST, PUT,
+DELETE) to that will receive <strong>405 Method Not Allowed</strong>.</p>
+<p>If our &#8216;foo_bar&#8217; URL path filter have to support
+<code class="docutils literal"><span class="pre">GET</span> <span class="pre">/objects/:id/foo_bar/:foo_val</span></code> requests then
+<code class="docutils literal"><span class="pre">ApiController::getObjectsFooBar()</span></code> will receive <code class="docutils literal"><span class="pre">:foo_val</span></code> as
+second argument. A best practice should be to add to method a validation
+on the number of arguments supported to avoid to respond to request as
+<code class="docutils literal"><span class="pre">GET</span> <span class="pre">/objects/:id/foo_bar/:foo_val/bla/bla/bla</span></code>.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">getObjectsFooBar</span><span class="p">(</span><span class="nv">$objectId</span><span class="p">,</span> <span class="nv">$fooVal</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">func_num_args</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">BeditaBadRequestException</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// handle request here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="formatting_bedita_objects.html" class="btn btn-neutral float-right" title="Formatting BEdita objects" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pagination.html" class="btn btn-neutral" title="Pagination" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alberto Pagliarini.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
